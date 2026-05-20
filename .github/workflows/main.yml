@@ -2,7 +2,7 @@ name: Build the game
 
 on:
   push:
-    branches: [master-dev, master] # Agregado 'master' por si haces push directo
+    branches: [master-dev, master]
   workflow_dispatch:
 jobs:
   
@@ -26,7 +26,6 @@ jobs:
     name: macos
     needs: BuildMobileCache
     permissions: write-all
-    continue-on-error: true # No detiene el flujo si Mac falla
     uses: ./.github/workflows/mac-universal.yml
     with:
       exportPath: macos
@@ -39,7 +38,7 @@ jobs:
     needs: BuildDesktopCache
     permissions: write-all
     strategy:
-      fail-fast: false # Evita que Windows/Linux tumben la cadena
+      fail-fast: false
       matrix:
         include:
           - name: Windows
@@ -75,7 +74,7 @@ jobs:
     needs: BuildMobileCache
     name: Build mobile
     strategy:
-      fail-fast: false # <--- ¡MÁGICO! Si iOS explota, Android SÍ CONTINÚA
+      fail-fast: false
     matrix:
       include:
         - name: Android

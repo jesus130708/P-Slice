@@ -1,9 +1,8 @@
 name: Build the game
 
 on:
-  push:
-    branches: [master-dev, master]
-  workflow_dispatch:
+  workflow_dispatch: # Ahora solo se activa manualmente dándole al botón en GitHub
+
 jobs:
   
   BuildMobileCache:
@@ -81,9 +80,8 @@ jobs:
         include:
           - name: Android
             os: ubuntu-24.04
-            # Forzamos a Lime a generar los archivos base, pero usará nuestro fix si se traba con Firebase
-            buildArgs: "android"
             exportPath: android
+            buildArgs: "android"
             cacheLibrariesPath: P-Slice.1.0.mobile-cache
             artifactName: P-Slice.1.0.android
             cachePath: P-Slice.1.0.build-android
@@ -107,57 +105,3 @@ jobs:
       cacheLibrariesPath: ${{ matrix.cacheLibrariesPath }}
       artifactPath: ${{ matrix.artifactPath }}
       cachePath: ${{matrix.cachePath}}
-
-  # CORRECCIÓN EN CALIENTE TRAS LA GENERACIÓN DE LIME
-  FixAndPackAndroid:
-    name: Fix Android Gradle & Pack
-    needs: BuildMobile
-    # Solo corre si el build de Android falla debido a Gradle, reparando el APK en el acto
-    if: always() && contains(needs.BuildMobile.result, 'failure')
-    runs-on: ubuntu-24.04
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
-
-      - name: Restore Haxe Libraries Cache
-        uses: actions/cache@v4
-        with:
-          path: |
-            .haxelib
-            ~/.gradle
-          key: P-Slice.1.0.mobile-cache
-
-      - name: Setup Java JDK
-        uses: actions/setup-java@v4
-        with:
-          distribution: 'temurin'
-          java-version: '17'
-
-      - name: Fix Generated Gradle File (Mutilate Firebase Method)
-        run: |
-          # Buscamos el archivo build.gradle generado por Lime en los temporales
-          for FILE in "export/release/android/bin/app/build.gradle" "export/release/android/bin/build.gradle"; do
-            if [ -f "$FILE" ]; then
-              echo "Rebanando Firebase de: $FILE"
-              sed -i '/firebaseCrashlytics\s*{/,/}/d' "$FILE"
-              sed -i '/firebaseCrashlytics/d' "$FILE"
-            fi
-          done
-
-      - name: Manual Compile APK (Safe Run)
-        run: |
-          if [ -f "export/release/android/bin/gradlew" ]; then
-            cd export/release/android/bin
-            chmod +x gradlew
-            ./gradlew assembleRelease
-          elif [ -f "export/release/android/bin/app/gradlew" ]; then
-            cd export/release/android/bin/app
-            chmod +x gradlew
-            ./gradlew assembleRelease
-          fi
-
-      - name: Upload Repaired Android Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: P-Slice.1.0.android
-          path: "export/release/android/bin/app/build/outputs/apk/release/*.apk"

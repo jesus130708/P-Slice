@@ -75,24 +75,24 @@ jobs:
     name: Build mobile
     strategy:
       fail-fast: false
-    matrix:
-      include:
-        - name: Android
-          os: ubuntu-24.04
-          exportPath: android
-          buildArgs: "android"
-          cacheLibrariesPath: P-Slice.1.0.mobile-cache
-          artifactName: P-Slice.1.0.android
-          cachePath: P-Slice.1.0.build-android
-          artifactPath: "export/release/android/bin/app/build/outputs/apk/release/*.apk"
-        - name: iOS
-          os: macos-15
-          buildArgs: "ios -nosign -final"
-          exportPath: ios/PSliceEngine/haxe/build/Release-iphoneos-64/
-          cacheLibrariesPath: P-Slice.1.0.mobile-cache
-          artifactName: P-Slice.1.0.ios
-          artifactPath: "export/release/ios/build/Release-iphoneos/*.ipa"
-          cachePath: P-Slice.1.0.build-ios
+      matrix:
+        include:
+          - name: Android
+            os: ubuntu-24.04
+            exportPath: android
+            buildArgs: "android"
+            cacheLibrariesPath: P-Slice.1.0.mobile-cache
+            artifactName: P-Slice.1.0.android
+            cachePath: P-Slice.1.0.build-android
+            artifactPath: "export/release/android/bin/app/build/outputs/apk/release/*.apk"
+          - name: iOS
+            os: macos-15
+            buildArgs: "ios -nosign -final"
+            exportPath: ios/PSliceEngine/haxe/build/Release-iphoneos-64/
+            cacheLibrariesPath: P-Slice.1.0.mobile-cache
+            artifactName: P-Slice.1.0.ios
+            artifactPath: "export/release/ios/build/Release-iphoneos/*.ipa"
+            cachePath: P-Slice.1.0.build-ios
     uses: ./.github/workflows/build.yml
     secrets: inherit
     with:
@@ -104,3 +104,4 @@ jobs:
       cacheLibrariesPath: ${{ matrix.cacheLibrariesPath }}
       artifactPath: ${{ matrix.artifactPath }}
       cachePath: ${{matrix.cachePath}}
+      

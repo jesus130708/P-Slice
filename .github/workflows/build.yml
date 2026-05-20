@@ -42,6 +42,7 @@ jobs:
         uses: krdlab/setup-haxe@master
         with:
           haxe-version: ${{ env.HAXE_VERSION }}
+          
       - name: Set XCode app
         if: inputs.os == 'macos-15'
         run: sudo xcode-select -s /Applications/Xcode_16.4.app
@@ -50,7 +51,6 @@ jobs:
         id: load-lib-cache
         uses: actions/cache@v3
         with:
-          # not caching the bin folder to prevent asset duplication and stuff like that
           key: ${{ inputs.cacheLibrariesPath }}
           fail-on-cache-miss: true
           enableCrossOsArchive: true
@@ -58,18 +58,17 @@ jobs:
             .haxelib/
           restore-keys: |
             ${{ inputs.cacheLibrariesPath }}
+
       - name: Restore existing build cache for faster compilation
         id: load-cache
         uses: actions/cache@v3
         with:
-          # not caching the bin folder to prevent asset duplication and stuff like that
           key: ${{ inputs.cachePath }}
           path: |
             export/release/${{ inputs.exportPath }}/haxe/
             export/release/${{ inputs.exportPath }}/obj/
           restore-keys: |
             cache-build-${{ inputs.exportPath }}
-            
 
       - name: Install libVLC
         if: inputs.exportPath == 'linux'
@@ -92,9 +91,26 @@ jobs:
           PLAYSTORE_FIREBASE_IOS: ${{ secrets.PLAYSTORE_FIREBASE_IOS }}
         run: printf '%s' "$PLAYSTORE_FIREBASE_IOS" > ./setup/GoogleService-Info.plist
 
+      # PASO 1: GENERAR EL PROYECTO ANDROID (SIN DEJAR QUE SE COMPILE COMPLETO SI HAY ERROR)
+      - name: Generate Android Build Files
+        if: inputs.exportPath == 'android'
+        run: haxelib run lime build android -nosign || true
+
+      # PASO 2: EL REMIENDO EN CALIENTE DIRECTO EN LA MÁQUINA VIRTUAL
+      - name: Fix Firebase Crashlytics Bug
+        if: inputs.exportPath == 'android'
+        run: |
+          for FILE in "export/release/android/bin/app/build.gradle" "export/release/android/bin/build.gradle"; do
+            if [ -f "$FILE" ]; then
+              echo "Mutilando bloque de Firebase corrupto en: $FILE"
+              sed -i '/firebaseCrashlytics\s*{/,/}/d' "$FILE"
+              sed -i '/firebaseCrashlytics/d' "$FILE"
+            fi
+          done
+
+      # PASO 3: COMPILACIÓN DEL JUEGO
       - name: Compile
         run: haxelib run lime build ${{ inputs.buildArgs }}
-          # setup/google-services.json
 
       - name: Upload debugging symbols (Android)
         if: inputs.exportPath == 'android' 
@@ -136,6 +152,7 @@ jobs:
           name: ${{ inputs.artifactName }}
           path: ${{ inputs.artifactPath }}
           if-no-files-found: error    
+
       - name: Clearing already existing cache
         uses: actions/github-script@v6
         with:
@@ -155,6 +172,7 @@ jobs:
                 console.log("Cache cleared.")
               }
             }
+
       - name: Uploading new cache
         uses: actions/cache@v3
         with:
@@ -163,4 +181,5 @@ jobs:
             export/release/${{ inputs.exportPath }}/haxe/
             export/release/${{ inputs.exportPath }}/obj/
           restore-keys: |
-            ${{ inputs.cachePath }}  
+            ${{ inputs.cachePath }}
+            

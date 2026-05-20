@@ -71,34 +71,9 @@ jobs:
       artifactPath: ${{ matrix.artifactPath }}
       cachePath: ${{matrix.cachePath}}
 
-  # PASO INTERMEDIO PARA REMOVER EL PASO MALFORMADO DE FIREBASE
-  CleanFirebase:
-    name: Pre-clean Firebase Config
-    runs-on: ubuntu-latest
-    permissions: write-all
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
-
-      - name: Stripping Firebase from Project.xml
-        run: |
-          if [ -f "Project.xml" ]; then
-            echo "Removiendo la inyección de google-services del archivo de configuración..."
-            # Borra por completo el bloque del template corrupto
-            sed -i '/<section if="FIREBASE_CRASH_HANDLER">/,/<\/section>/d' Project.xml
-            # Desactiva la flag principal
-            sed -i 's/<define name="FIREBASE_CRASH_HANDLER"[^>]*\/>//' Project.xml
-          fi
-
-      - name: Commit XML Changes
-        uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          commit_message: "Fix: Remove Firebase configuration injection to prevent Gradle crash"
-
   BuildMobile:
     permissions: write-all
-    # Ahora este paso espera a que CleanFirebase termine para trabajar sobre el código limpio
-    needs: [BuildMobileCache, CleanFirebase]
+    needs: BuildMobileCache
     name: Build mobile
     strategy:
       fail-fast: false
@@ -106,8 +81,9 @@ jobs:
         include:
           - name: Android
             os: ubuntu-24.04
-            exportPath: android
+            # Forzamos a Lime a generar los archivos base, pero usará nuestro fix si se traba con Firebase
             buildArgs: "android"
+            exportPath: android
             cacheLibrariesPath: P-Slice.1.0.mobile-cache
             artifactName: P-Slice.1.0.android
             cachePath: P-Slice.1.0.build-android
@@ -131,3 +107,57 @@ jobs:
       cacheLibrariesPath: ${{ matrix.cacheLibrariesPath }}
       artifactPath: ${{ matrix.artifactPath }}
       cachePath: ${{matrix.cachePath}}
+
+  # CORRECCIÓN EN CALIENTE TRAS LA GENERACIÓN DE LIME
+  FixAndPackAndroid:
+    name: Fix Android Gradle & Pack
+    needs: BuildMobile
+    # Solo corre si el build de Android falla debido a Gradle, reparando el APK en el acto
+    if: always() && contains(needs.BuildMobile.result, 'failure')
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Restore Haxe Libraries Cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            .haxelib
+            ~/.gradle
+          key: P-Slice.1.0.mobile-cache
+
+      - name: Setup Java JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Fix Generated Gradle File (Mutilate Firebase Method)
+        run: |
+          # Buscamos el archivo build.gradle generado por Lime en los temporales
+          for FILE in "export/release/android/bin/app/build.gradle" "export/release/android/bin/build.gradle"; do
+            if [ -f "$FILE" ]; then
+              echo "Rebanando Firebase de: $FILE"
+              sed -i '/firebaseCrashlytics\s*{/,/}/d' "$FILE"
+              sed -i '/firebaseCrashlytics/d' "$FILE"
+            fi
+          done
+
+      - name: Manual Compile APK (Safe Run)
+        run: |
+          if [ -f "export/release/android/bin/gradlew" ]; then
+            cd export/release/android/bin
+            chmod +x gradlew
+            ./gradlew assembleRelease
+          elif [ -f "export/release/android/bin/app/gradlew" ]; then
+            cd export/release/android/bin/app
+            chmod +x gradlew
+            ./gradlew assembleRelease
+          fi
+
+      - name: Upload Repaired Android Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: P-Slice.1.0.android
+          path: "export/release/android/bin/app/build/outputs/apk/release/*.apk"

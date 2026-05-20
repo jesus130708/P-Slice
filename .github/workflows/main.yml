@@ -1,76 +1,3 @@
-name: Build the game
-
-on:
-  push:
-    branches: [master-dev, master]
-  workflow_dispatch:
-
-jobs:
-  BuildMobileCache:
-    name: Build Caches
-    permissions: write-all
-    uses: ./.github/workflows/dependencies.yml
-    with:
-      os: macos-15
-      CACHE_NAME: P-Slice.1.0.mobile-cache
-      setupScript: sh ./setup/mobile.sh
-
-  BuildDesktopCache:
-    name: Build Caches
-    permissions: write-all
-    uses: ./.github/workflows/dependencies.yml
-    with:
-      os: ubuntu-24.04
-      setupScript: sh ./setup/unix.sh
-      CACHE_NAME: P-Slice.1.0.desktop-cache
-
-  BuildMacos:
-    name: macos
-    needs: BuildMobileCache
-    permissions: write-all
-    uses: ./.github/workflows/mac-universal.yml
-    with:
-      exportPath: macos
-      cachePath: P-Slice.1.0.build-macos
-      cacheLibrariesPath: P-Slice.1.0.mobile-cache
-      artifactName: P-Slice.1.0.macos
-      artifactPath: export/release/macos/bin/*
-
-  BuildDesktop:
-    name: Build Desktop
-    needs: BuildDesktopCache
-    permissions: write-all
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - name: Windows
-            os: windows-2022
-            buildArgs: "windows -final"
-            exportPath: windows
-            artifactName: P-Slice.1.0.windows
-            cacheLibrariesPath: P-Slice.1.0.desktop-cache
-            cachePath: P-Slice.1.0.build-windows
-            artifactPath: export\release\windows\bin\*
-          - name: Linux
-            os: ubuntu-22.04
-            buildArgs: "linux -final"
-            exportPath: linux
-            artifactName: P-Slice.1.0.linux
-            cachePath: P-Slice.1.0.build-linux
-            cacheLibrariesPath: P-Slice.1.0.desktop-cache
-            artifactPath: export/release/linux/bin/*
-    uses: ./.github/workflows/build.yml
-    with:
-      name: ${{ matrix.name }}
-      os: ${{ matrix.os }}
-      buildArgs: ${{ matrix.buildArgs }}
-      cacheLibrariesPath: ${{ matrix.cacheLibrariesPath }}
-      exportPath: ${{ matrix.exportPath }}
-      artifactName: ${{ matrix.artifactName }}
-      artifactPath: ${{ matrix.artifactPath }}
-      cachePath: ${{matrix.cachePath}}
-
   BuildMobile:
     permissions: write-all
     needs: BuildMobileCache
@@ -126,26 +53,45 @@ jobs:
         run: |
           haxelib dev extension-androidtools .haxelib/extension-androidtools/git || true
 
-      - name: Build Game C++ (Generate Project)
+      - name: Fix Source Project XML (Pre-clean Firebase)
+        run: |
+          # Esto limpia el Project.xml antes de compilar por si acaso
+          if [ -f "Project.xml" ]; then
+            sed -i 's/<define name="FIREBASE_CRASH_HANDLER"[^>]*\/>//' Project.xml
+          fi
+
+      - name: Build Game C++ and Gradle Project
         run: |
           haxelib run lime build ${{ matrix.buildArgs }} -nosign || true
 
-      - name: Fix Malformed Gradle File (Remove Firebase)
+      - name: Fix Generated Gradle File (Remove Firebase Method)
         if: matrix.name == 'Android'
         run: |
-          FILE="export/release/android/bin/app/build.gradle"
-          if [ -f "$FILE" ]; then
-            echo "Borrando rastro de Firebase en Gradle..."
-            sed -i '/firebaseCrashlytics\s*{/,/}/d' "$FILE"
-            sed -i '/firebaseCrashlytics/d' "$FILE"
-          fi
+          # Buscamos el build.gradle en las rutas posibles donde suele crearse
+          for FILE in "export/release/android/bin/app/build.gradle" "export/release/android/bin/build.gradle"; do
+            if [ -f "$FILE" ]; then
+              echo "Limpiando rastro de Firebase en: $FILE"
+              sed -i '/firebaseCrashlytics\s*{/,/}/d' "$FILE"
+              sed -i '/firebaseCrashlytics/d' "$FILE"
+            fi
+          done
 
-      - name: Compile APK / IPA
+      - name: Compile APK / IPA Final
         run: |
           if [ "${{ matrix.name }}" = "Android" ]; then
-            cd export/release/android/bin
-            chmod +x gradlew
-            ./gradlew assembleRelease
+            # Buscamos dónde quedó el archivo ejecutable gradlew para encenderlo
+            if [ -f "export/release/android/bin/gradlew" ]; then
+              cd export/release/android/bin
+              chmod +x gradlew
+              ./gradlew assembleRelease
+            elif [ -f "export/release/android/bin/app/gradlew" ]; then
+              cd export/release/android/bin/app
+              chmod +x gradlew
+              ./gradlew assembleRelease
+            else
+              echo "Ruta manual no encontrada, forzando compilación limpia por Lime..."
+              haxelib run lime build android -nosign
+            fi
           else
             echo "Saltando empaquetado manual para iOS..."
           fi

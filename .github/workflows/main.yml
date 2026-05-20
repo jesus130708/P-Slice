@@ -53,7 +53,7 @@ jobs:
             cachePath: P-Slice.1.0.build-windows
             artifactPath: export\release\windows\bin\*
           - name: Linux
-            os: ubuntu-22-04
+            os: ubuntu-22.04
             buildArgs: "linux -final"
             exportPath: linux
             artifactName: P-Slice.1.0.linux
@@ -71,9 +71,34 @@ jobs:
       artifactPath: ${{ matrix.artifactPath }}
       cachePath: ${{matrix.cachePath}}
 
+  # PASO INTERMEDIO PARA REMOVER EL PASO MALFORMADO DE FIREBASE
+  CleanFirebase:
+    name: Pre-clean Firebase Config
+    runs-on: ubuntu-latest
+    permissions: write-all
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Stripping Firebase from Project.xml
+        run: |
+          if [ -f "Project.xml" ]; then
+            echo "Removiendo la inyección de google-services del archivo de configuración..."
+            # Borra por completo el bloque del template corrupto
+            sed -i '/<section if="FIREBASE_CRASH_HANDLER">/,/<\/section>/d' Project.xml
+            # Desactiva la flag principal
+            sed -i 's/<define name="FIREBASE_CRASH_HANDLER"[^>]*\/>//' Project.xml
+          fi
+
+      - name: Commit XML Changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Fix: Remove Firebase configuration injection to prevent Gradle crash"
+
   BuildMobile:
     permissions: write-all
-    needs: BuildMobileCache
+    # Ahora este paso espera a que CleanFirebase termine para trabajar sobre el código limpio
+    needs: [BuildMobileCache, CleanFirebase]
     name: Build mobile
     strategy:
       fail-fast: false
@@ -95,107 +120,14 @@ jobs:
             artifactName: P-Slice.1.0.ios
             artifactPath: "export/release/ios/build/Release-iphoneos/*.ipa"
             cachePath: P-Slice.1.0.build-ios
-
-    runs-on: ${{ matrix.os }}
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup Java JDK
-        if: matrix.name == 'Android'
-        uses: actions/setup-java@v4
-        with:
-          distribution: 'temurin'
-          java-version: '17'
-
-      - name: Setup Haxe
-        uses: krdlab/setup-haxe@v1
-        with:
-          haxe-version: 4.3.6
-
-      - name: Restore Haxe Libraries Cache
-        uses: actions/cache@v4
-        with:
-          path: |
-            .haxelib
-            ~/.gradle
-          key: ${{ matrix.cacheLibrariesPath }}
-
-      - name: Run Setup Script (Install Lime and Deps)
-        run: |
-          chmod +x ./setup/mobile.sh
-          sh ./setup/mobile.sh
-
-      - name: Configure Lime Android SDK Routes
-        if: matrix.name == 'Android'
-        run: |
-          # Le decimos a Lime exactamente dónde están las herramientas en el servidor de GitHub
-          haxelib run lime config ANDROID_SDK $ANDROID_HOME
-          haxelib run lime config ANDROID_NDK $ANDROID_NDK_LATEST_HOME
-          haxelib run lime config JAVA_HOME $JAVA_HOME
-          echo "Rutas de Android vinculadas con éxito."
-
-      - name: Restore C++ Compilation Cache
-        uses: actions/cache@v4
-        with:
-          path: export/release/${{ matrix.exportPath }}/haxe
-          key: ${{ matrix.cachePath }}-${{ github.run_id }}
-          restore-keys: |
-            ${{ matrix.cachePath }}-
-
-      - name: Install Missing Tools
-        run: |
-          haxelib dev extension-androidtools .haxelib/extension-androidtools/git || true
-
-      - name: Fix Source Project XML (Pre-clean Firebase)
-        run: |
-          if [ -f "Project.xml" ]; then
-            sed -i 's/<define name="FIREBASE_CRASH_HANDLER"[^>]*\/>//' Project.xml
-          fi
-
-      - name: Build Game C++ and Gradle Project
-        run: |
-          haxelib run lime build ${{ matrix.buildArgs }} -nosign || true
-
-      - name: Fix Generated Gradle File (Remove Firebase Method)
-        if: matrix.name == 'Android'
-        run: |
-          for FILE in "export/release/android/bin/app/build.gradle" "export/release/android/bin/build.gradle"; do
-            if [ -f "$FILE" ]; then
-              echo "Limpiando rastro de Firebase en: $FILE"
-              sed -i '/firebaseCrashlytics\s*{/,/}/d' "$FILE"
-              sed -i '/firebaseCrashlytics/d' "$FILE"
-            fi
-          done
-
-      - name: Compile APK / IPA Final
-        run: |
-          if [ "${{ matrix.name }}" = "Android" ]; then
-            if [ -f "export/release/android/bin/gradlew" ]; then
-              cd export/release/android/bin
-              chmod +x gradlew
-              ./gradlew assembleRelease
-            elif [ -f "export/release/android/bin/app/gradlew" ]; then
-              cd export/release/android/bin/app
-              chmod +x gradlew
-              ./gradlew assembleRelease
-            else
-              echo "Ruta manual no encontrada, forzando compilación limpia por Lime..."
-              haxelib run lime build android -nosign
-            fi
-          else
-            echo "Saltando empaquetado manual para iOS..."
-          fi
-
-      - name: Save C++ Cache (Forced Always)
-        uses: actions/cache/save@v4
-        if: always()
-        with:
-          path: export/release/${{ matrix.exportPath }}/haxe
-          key: ${{ matrix.cachePath }}-${{ github.run_id }}
-
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: ${{ matrix.artifactName }}
-          path: ${{ matrix.artifactPath }}
+    uses: ./.github/workflows/build.yml
+    secrets: inherit
+    with:
+      name: ${{ matrix.name }}
+      os: ${{ matrix.os }}
+      buildArgs: ${{ matrix.buildArgs }}
+      exportPath: ${{ matrix.exportPath }}
+      artifactName: ${{ matrix.artifactName }}
+      cacheLibrariesPath: ${{ matrix.cacheLibrariesPath }}
+      artifactPath: ${{ matrix.artifactPath }}
+      cachePath: ${{matrix.cachePath}}

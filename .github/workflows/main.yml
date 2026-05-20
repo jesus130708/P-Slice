@@ -1,3 +1,76 @@
+name: Build the game
+
+on:
+  push:
+    branches: [master-dev, master]
+  workflow_dispatch:
+jobs:
+  
+  BuildMobileCache:
+    name: Build Caches
+    permissions: write-all
+    uses: ./.github/workflows/dependencies.yml
+    with:
+      os: macos-15
+      CACHE_NAME: P-Slice.1.0.mobile-cache
+      setupScript: sh ./setup/mobile.sh
+
+  BuildDesktopCache:
+    name: Build Caches
+    permissions: write-all
+    uses: ./.github/workflows/dependencies.yml
+    with:
+      os: ubuntu-24.04
+      setupScript: sh ./setup/unix.sh
+      CACHE_NAME: P-Slice.1.0.desktop-cache
+
+  BuildMacos:
+    name: macos
+    needs: BuildMobileCache
+    permissions: write-all
+    uses: ./.github/workflows/mac-universal.yml
+    with:
+      exportPath: macos
+      cachePath: P-Slice.1.0.build-macos
+      cacheLibrariesPath: P-Slice.1.0.mobile-cache
+      artifactName: P-Slice.1.0.macos
+      artifactPath: export/release/macos/bin/*
+
+  BuildDesktop:
+    name: Build Desktop
+    needs: BuildDesktopCache
+    permissions: write-all
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: Windows
+            os: windows-2022
+            buildArgs: "windows -final"
+            exportPath: windows
+            artifactName: P-Slice.1.0.windows
+            cacheLibrariesPath: P-Slice.1.0.desktop-cache
+            cachePath: P-Slice.1.0.build-windows
+            artifactPath: export\release\windows\bin\*
+          - name: Linux
+            os: ubuntu-22-04
+            buildArgs: "linux -final"
+            exportPath: linux
+            artifactName: P-Slice.1.0.linux
+            cachePath: P-Slice.1.0.build-linux
+            cacheLibrariesPath: P-Slice.1.0.desktop-cache
+            artifactPath: export/release/linux/bin/*
+    uses: ./.github/workflows/build.yml
+    with:
+      name: ${{ matrix.name }}
+      os: ${{ matrix.os }}
+      buildArgs: ${{ matrix.buildArgs }}
+      cacheLibrariesPath: ${{ matrix.cacheLibrariesPath }}
+      exportPath: ${{ matrix.exportPath }}
+      artifactName: ${{ matrix.artifactName }}
+      artifactPath: ${{ matrix.artifactPath }}
+      cachePath: ${{matrix.cachePath}}
+
   BuildMobile:
     permissions: write-all
     needs: BuildMobileCache
@@ -55,7 +128,6 @@
 
       - name: Fix Source Project XML (Pre-clean Firebase)
         run: |
-          # Esto limpia el Project.xml antes de compilar por si acaso
           if [ -f "Project.xml" ]; then
             sed -i 's/<define name="FIREBASE_CRASH_HANDLER"[^>]*\/>//' Project.xml
           fi
@@ -67,7 +139,6 @@
       - name: Fix Generated Gradle File (Remove Firebase Method)
         if: matrix.name == 'Android'
         run: |
-          # Buscamos el build.gradle en las rutas posibles donde suele crearse
           for FILE in "export/release/android/bin/app/build.gradle" "export/release/android/bin/build.gradle"; do
             if [ -f "$FILE" ]; then
               echo "Limpiando rastro de Firebase en: $FILE"
@@ -79,7 +150,6 @@
       - name: Compile APK / IPA Final
         run: |
           if [ "${{ matrix.name }}" = "Android" ]; then
-            # Buscamos dónde quedó el archivo ejecutable gradlew para encenderlo
             if [ -f "export/release/android/bin/gradlew" ]; then
               cd export/release/android/bin
               chmod +x gradlew
@@ -108,3 +178,4 @@
         with:
           name: ${{ matrix.artifactName }}
           path: ${{ matrix.artifactPath }}
+          

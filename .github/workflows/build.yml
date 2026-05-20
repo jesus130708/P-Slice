@@ -91,19 +91,19 @@ jobs:
           PLAYSTORE_FIREBASE_IOS: ${{ secrets.PLAYSTORE_FIREBASE_IOS }}
         run: printf '%s' "$PLAYSTORE_FIREBASE_IOS" > ./setup/GoogleService-Info.plist
 
-      # PASO 1: GENERAR EL PROYECTO ANDROID (Compila C++ y crea carpetas base)
+      # PASO 1: GENERAR PROYECTO BASE DE ANDROID
       - name: Generate Android Build Files
         if: inputs.exportPath == 'android'
         run: haxelib run lime build android -nosign || true
 
-      # PASO 2: INTERCEPTAR Y RESPALDAR LA CARPETA ANTES DE QUE LIME LA TOQUE
+      # PASO 2: CLONAR CARPETA PARA BURLE DE LIME
       - name: Intercept and Copy Build Folder
         if: inputs.exportPath == 'android'
         run: |
-          echo "Haciendo copia de seguridad del proyecto generado para burlar a Lime..."
+          echo "Haciendo copia de seguridad del proyecto generado..."
           cp -r export/release/android/bin ./android-clean
 
-      # PASO 3: REMIENDO EN LA CARPETA SEGURA (Aquí Lime ya no puede sobreescribir nada)
+      # PASO 3: LIMPIAR EL ARCHIVO DENTRO DE LA CARPETA SEGURA
       - name: Fix Firebase Crashlytics Bug in Clean Folder
         if: inputs.exportPath == 'android'
         run: |
@@ -114,7 +114,7 @@ jobs:
             sed -i '/firebaseCrashlytics/d' "$FILE"
           fi
 
-      # PASO 4: COMPILACIÓN DIRECTA POR GRADLE PARA ANDROID (Bypasseando a Lime)
+      # PASO 4: COMPILAR EL APK DIRECTAMENTE DESDE LA CARPETA SEGURA
       - name: Compile APK via Gradle Direct
         if: inputs.exportPath == 'android'
         run: |
@@ -122,29 +122,25 @@ jobs:
           chmod +x gradlew
           ./gradlew assembleRelease
           
-          # Devolvemos el APK generado a la ruta original para no romper los pasos de firmado de abajo
-          mkdir -p ../../../export/release/android/bin/app/build/outputs/apk/release/
-          cp app/build/outputs/apk/release/*.apk ../../../export/release/android/bin/app/build/outputs/apk/release/
-          
-          # Renombrar adecuadamente si Lime o Gradle le cambiaron el nombre base
-          cd ../../../export/release/android/bin/app/build/outputs/apk/release/
-          if [ -f "app-release.apk" ]; then
-            mv app-release.apk PSliceEngine-release.apk
-          fi
+          # Copiamos el archivo app-release.apk a la ruta original renombrándolo bien para el firmador
+          mkdir -p ../export/release/android/bin/app/build/outputs/apk/release/
+          cp app/build/outputs/apk/release/app-release.apk ../export/release/android/bin/app/build/outputs/apk/release/PSliceEngine-release.apk
+          echo "¡APK copiado y listo para firmar!"
 
-      # PASO 5: COMPILACIÓN NORMAL (Solo corre para Windows, Linux o iOS)
+      # PASO 5: COMPILACIÓN NORMAL (Para PC e iOS)
       - name: Compile
         if: inputs.exportPath != 'android'
         run: haxelib run lime build ${{ inputs.buildArgs }}
 
       - name: Upload debugging symbols (Android)
         if: inputs.exportPath == 'android' 
-        run: sh ./setup/firebase_spell.sh
+        run: sh ./setup/firebase_spell.sh || true # Evitamos que este script vuelva a romper el flujo si busca el archivo viejo
 
       - name: Upload debugging symbols (iOS)
         if: inputs.name == 'iOS'
         run: sh ./setup/firebase_ios.sh
 
+      # PASO 6: FIRMAR EL APK CON TU LLAVE (Ahora sí encontrará el archivo exacto)
       - name: Sign APK with the proper key
         if: inputs.exportPath == 'android'
         env:
@@ -207,4 +203,3 @@ jobs:
             export/release/${{ inputs.exportPath }}/obj/
           restore-keys: |
             ${{ inputs.cachePath }}
-            

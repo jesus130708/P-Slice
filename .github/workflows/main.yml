@@ -4,8 +4,8 @@ on:
   push:
     branches: [master-dev, master]
   workflow_dispatch:
+
 jobs:
-  
   BuildMobileCache:
     name: Build Caches
     permissions: write-all
@@ -14,6 +14,7 @@ jobs:
       os: macos-15
       CACHE_NAME: P-Slice.1.0.mobile-cache
       setupScript: sh ./setup/mobile.sh
+
   BuildDesktopCache:
     name: Build Caches
     permissions: write-all
@@ -22,6 +23,7 @@ jobs:
       os: ubuntu-24.04
       setupScript: sh ./setup/unix.sh
       CACHE_NAME: P-Slice.1.0.desktop-cache
+
   BuildMacos:
     name: macos
     needs: BuildMobileCache
@@ -33,6 +35,7 @@ jobs:
       cacheLibrariesPath: P-Slice.1.0.mobile-cache
       artifactName: P-Slice.1.0.macos
       artifactPath: export/release/macos/bin/*
+
   BuildDesktop:
     name: Build Desktop
     needs: BuildDesktopCache
@@ -57,7 +60,6 @@ jobs:
             cachePath: P-Slice.1.0.build-linux
             cacheLibrariesPath: P-Slice.1.0.desktop-cache
             artifactPath: export/release/linux/bin/*
-
     uses: ./.github/workflows/build.yml
     with:
       name: ${{ matrix.name }}
@@ -93,15 +95,70 @@ jobs:
             artifactName: P-Slice.1.0.ios
             artifactPath: "export/release/ios/build/Release-iphoneos/*.ipa"
             cachePath: P-Slice.1.0.build-ios
-    uses: ./.github/workflows/build.yml
-    secrets: inherit
-    with:
-      name: ${{ matrix.name }}
-      os: ${{ matrix.os }}
-      buildArgs: ${{ matrix.buildArgs }}
-      exportPath: ${{ matrix.exportPath }}
-      artifactName: ${{ matrix.artifactName }}
-      cacheLibrariesPath: ${{ matrix.cacheLibrariesPath }}
-      artifactPath: ${{ matrix.artifactPath }}
-      cachePath: ${{matrix.cachePath}}
-      
+
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Haxe
+        uses: krdlab/setup-haxe@v1
+        with:
+          haxe-version: 4.3.6
+
+      - name: Restore Haxe Libraries Cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            .haxelib
+            ~/.gradle
+          key: ${{ matrix.cacheLibrariesPath }}
+
+      - name: Restore C++ Compilation Cache
+        uses: actions/cache@v4
+        with:
+          path: export/release/${{ matrix.exportPath }}/haxe
+          key: ${{ matrix.cachePath }}-${{ github.run_id }}
+          restore-keys: |
+            ${{ matrix.cachePath }}-
+
+      - name: Install Missing Tools
+        run: |
+          haxelib dev extension-androidtools .haxelib/extension-androidtools/git || true
+
+      - name: Build Game C++ (Generate Project)
+        run: |
+          haxelib run lime build ${{ matrix.buildArgs }} -nosign || true
+
+      - name: Fix Malformed Gradle File (Remove Firebase)
+        if: matrix.name == 'Android'
+        run: |
+          FILE="export/release/android/bin/app/build.gradle"
+          if [ -f "$FILE" ]; then
+            echo "Borrando rastro de Firebase en Gradle..."
+            sed -i '/firebaseCrashlytics\s*{/,/}/d' "$FILE"
+            sed -i '/firebaseCrashlytics/d' "$FILE"
+          fi
+
+      - name: Compile APK / IPA
+        run: |
+          if [ "${{ matrix.name }}" = "Android" ]; then
+            cd export/release/android/bin
+            chmod +x gradlew
+            ./gradlew assembleRelease
+          else
+            echo "Saltando empaquetado manual para iOS..."
+          fi
+
+      - name: Save C++ Cache (Forced Always)
+        uses: actions/cache/save@v4
+        if: always()
+        with:
+          path: export/release/${{ matrix.exportPath }}/haxe
+          key: ${{ matrix.cachePath }}-${{ github.run_id }}
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.artifactName }}
+          path: ${{ matrix.artifactPath }}

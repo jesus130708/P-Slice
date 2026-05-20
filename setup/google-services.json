@@ -1,0 +1,28 @@
+{
+  "project_info": {
+    "project_number": "1234567890",
+    "project_id": "pslice-dummy",
+    "storage_bucket": "pslice-dummy.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1234567890:android:1234567890",
+        "android_client_info": {
+          "package_name": "com.shadowmario.psychengine"
+        }
+      },
+      "api_key": [
+        {
+          "current_key": "dummy_api_key_placeholder"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "3"
+}

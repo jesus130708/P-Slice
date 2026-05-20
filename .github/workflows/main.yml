@@ -53,7 +53,7 @@ jobs:
             cachePath: P-Slice.1.0.build-windows
             artifactPath: export\release\windows\bin\*
           - name: Linux
-            os: ubuntu-22-04
+            os: ubuntu-22.04
             buildArgs: "linux -final"
             exportPath: linux
             artifactName: P-Slice.1.0.linux
@@ -113,6 +113,11 @@ jobs:
             .haxelib
             ~/.gradle
           key: ${{ matrix.cacheLibrariesPath }}
+
+      - name: Run Setup Script (Install Lime and Deps)
+        run: |
+          chmod +x ./setup/mobile.sh
+          sh ./setup/mobile.sh
 
       - name: Restore C++ Compilation Cache
         uses: actions/cache@v4

@@ -106,6 +106,7 @@ class StoryMenuState extends MusicBeatState
 
 		if (curWeek >= WeekData.weeksList.length)
 			curWeek = 0;
+		curSelectedPartial = curWeek;
 
 		#if LEGACY_PSYCH
 		scoreText = new FlxText(10, 10, 0, 'LEVEL SCORE: ' + lerpScore, 36);

@@ -91,25 +91,50 @@ jobs:
           PLAYSTORE_FIREBASE_IOS: ${{ secrets.PLAYSTORE_FIREBASE_IOS }}
         run: printf '%s' "$PLAYSTORE_FIREBASE_IOS" > ./setup/GoogleService-Info.plist
 
-      # PASO 1: GENERAR EL PROYECTO ANDROID (SIN DEJAR QUE SE COMPILE COMPLETO SI HAY ERROR)
+      # PASO 1: GENERAR EL PROYECTO ANDROID (Compila C++ y crea carpetas base)
       - name: Generate Android Build Files
         if: inputs.exportPath == 'android'
         run: haxelib run lime build android -nosign || true
 
-      # PASO 2: EL REMIENDO EN CALIENTE DIRECTO EN LA MÁQUINA VIRTUAL
-      - name: Fix Firebase Crashlytics Bug
+      # PASO 2: INTERCEPTAR Y RESPALDAR LA CARPETA ANTES DE QUE LIME LA TOQUE
+      - name: Intercept and Copy Build Folder
         if: inputs.exportPath == 'android'
         run: |
-          for FILE in "export/release/android/bin/app/build.gradle" "export/release/android/bin/build.gradle"; do
-            if [ -f "$FILE" ]; then
-              echo "Mutilando bloque de Firebase corrupto en: $FILE"
-              sed -i '/firebaseCrashlytics\s*{/,/}/d' "$FILE"
-              sed -i '/firebaseCrashlytics/d' "$FILE"
-            fi
-          done
+          echo "Haciendo copia de seguridad del proyecto generado para burlar a Lime..."
+          cp -r export/release/android/bin ./android-clean
 
-      # PASO 3: COMPILACIÓN DEL JUEGO
+      # PASO 3: REMIENDO EN LA CARPETA SEGURA (Aquí Lime ya no puede sobreescribir nada)
+      - name: Fix Firebase Crashlytics Bug in Clean Folder
+        if: inputs.exportPath == 'android'
+        run: |
+          FILE="./android-clean/app/build.gradle"
+          if [ -f "$FILE" ]; then
+            echo "Mutilando bloque de Firebase corrupto en copia segura: $FILE"
+            sed -i '/firebaseCrashlytics\s*{/,/}/d' "$FILE"
+            sed -i '/firebaseCrashlytics/d' "$FILE"
+          fi
+
+      # PASO 4: COMPILACIÓN DIRECTA POR GRADLE PARA ANDROID (Bypasseando a Lime)
+      - name: Compile APK via Gradle Direct
+        if: inputs.exportPath == 'android'
+        run: |
+          cd android-clean
+          chmod +x gradlew
+          ./gradlew assembleRelease
+          
+          # Devolvemos el APK generado a la ruta original para no romper los pasos de firmado de abajo
+          mkdir -p ../../../export/release/android/bin/app/build/outputs/apk/release/
+          cp app/build/outputs/apk/release/*.apk ../../../export/release/android/bin/app/build/outputs/apk/release/
+          
+          # Renombrar adecuadamente si Lime o Gradle le cambiaron el nombre base
+          cd ../../../export/release/android/bin/app/build/outputs/apk/release/
+          if [ -f "app-release.apk" ]; then
+            mv app-release.apk PSliceEngine-release.apk
+          fi
+
+      # PASO 5: COMPILACIÓN NORMAL (Solo corre para Windows, Linux o iOS)
       - name: Compile
+        if: inputs.exportPath != 'android'
         run: haxelib run lime build ${{ inputs.buildArgs }}
 
       - name: Upload debugging symbols (Android)

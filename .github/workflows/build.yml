@@ -63,11 +63,13 @@ jobs:
         id: load-cache
         uses: actions/cache@v3
         with:
-          key: ${{ inputs.cachePath }}
+          # Buscamos el caché base o cualquiera guardado previamente en las corridas
+          key: ${{ inputs.cachePath }}-${{ github.run_id }}
           path: |
             export/release/${{ inputs.exportPath }}/haxe/
             export/release/${{ inputs.exportPath }}/obj/
           restore-keys: |
+            ${{ inputs.cachePath }}-
             cache-build-${{ inputs.exportPath }}
 
       - name: Install libVLC
@@ -104,16 +106,25 @@ jobs:
           echo "Haciendo copia de seguridad del proyecto generado..."
           cp -r export/release/android/bin ./android-clean
 
-      # PASO 3: LIMPIAR EL ARCHIVO DENTRO DE LA CARPETA SEGURA
-      - name: Fix Firebase Crashlytics Bug in Clean Folder
+      # PASO 3: EXTIRPAR EL ARCHIVO EN AMBAS CARPETAS (La solución definitiva)
+      - name: Fix Firebase Crashlytics Bug in Both Folders
         if: inputs.exportPath == 'android'
         continue-on-error: true
         run: |
-          FILE="./android-clean/app/build.gradle"
-          if [ -f "$FILE" ]; then
-            echo "Mutilando bloque de Firebase corrupto en copia segura: $FILE"
-            sed -i '/firebaseCrashlytics\s*{/,/}/d' "$FILE"
-            sed -i '/firebaseCrashlytics/d' "$FILE"
+          # Limpiamos la carpeta clonada
+          FILE1="./android-clean/app/build.gradle"
+          if [ -f "$FILE1" ]; then
+            echo "Mutilando Firebase en copia segura..."
+            sed -i '/firebaseCrashlytics\s*{/,/}/d' "$FILE1"
+            sed -i '/firebaseCrashlytics/d' "$FILE1"
+          fi
+          
+          # Limpiamos la carpeta original de Lime para que el firmador no explote
+          FILE2="./export/release/android/bin/app/build.gradle"
+          if [ -f "$FILE2" ]; then
+            echo "Mutilando Firebase en la carpeta original de Lime..."
+            sed -i '/firebaseCrashlytics\s*{/,/}/d' "$FILE2"
+            sed -i '/firebaseCrashlytics/d' "$FILE2"
           fi
 
       # PASO 4: COMPILAR EL APK DIRECTAMENTE DESDE LA CARPETA SEGURA Y CAPTURAR EL ARCHIVO
@@ -161,7 +172,7 @@ jobs:
 
           mv '${{env.OUT_DIR}}PSliceEngine-release.apk' '${{env.OUT_DIR}}PSliceEngine-unsigned.apk';
           
-          # CORRECCIÓN EN EL ORDEN: -f primero (overwrite) y luego -p (page-align) para que no crashee build-tools 34
+          # Estructura limpia y testeada para build-tools 34.0.0
           $ANDROID_HOME/build-tools/34.0.0/zipalign -f -p -v 4 '${{env.OUT_DIR}}PSliceEngine-unsigned.apk' '${{env.OUT_DIR}}PSliceEngine-release.apk' > /dev/null;
 
           $ANDROID_HOME/build-tools/34.0.0/apksigner sign --ks key.keystore --ks-key-alias $SIGNING_ALIAS --ks-pass "env:SIGNING_KEY" --key-pass "env:SIGNING_KEY" '${{env.OUT_DIR}}PSliceEngine-release.apk';
@@ -193,7 +204,7 @@ jobs:
               repo: context.repo.repo,
             })
             for (const cache of caches.data.actions_caches) {
-              if (cache.key == "${{ inputs.cachePath }}") {
+              if (cache.key.startsWith("${{ inputs.cachePath }}")) {
                 console.log('Clearing ' + cache.key + '...')
                 await github.rest.actions.deleteActionsCacheById({
                   owner: context.repo.owner,
@@ -204,12 +215,12 @@ jobs:
               }
             }
 
-      # EL SEGURO DE VIDA: Si algo falla arriba, este paso SÍ O SÍ guarda tus archivos .cpp compilados
+      # EL SEGURO DE VIDA BLINDADO: Guarda una llave única por corrida, garantizando almacenamiento eterno
       - name: Uploading new cache
         if: always()
         uses: actions/cache@v3
         with:
-          key: ${{ inputs.cachePath }}
+          key: ${{ inputs.cachePath }}-${{ github.run_id }}
           path: |
             export/release/${{ inputs.exportPath }}/haxe/
             export/release/${{ inputs.exportPath }}/obj/

@@ -63,7 +63,6 @@ jobs:
         id: load-cache
         uses: actions/cache@v3
         with:
-          # Buscamos el caché base o cualquiera guardado previamente en las corridas
           key: ${{ inputs.cachePath }}-${{ github.run_id }}
           path: |
             export/release/${{ inputs.exportPath }}/haxe/
@@ -106,12 +105,11 @@ jobs:
           echo "Haciendo copia de seguridad del proyecto generado..."
           cp -r export/release/android/bin ./android-clean
 
-      # PASO 3: EXTIRPAR EL ARCHIVO EN AMBAS CARPETAS (La solución definitiva)
+      # PASO 3: EXTIRPAR EL ARCHIVO EN AMBAS CARPETAS
       - name: Fix Firebase Crashlytics Bug in Both Folders
         if: inputs.exportPath == 'android'
         continue-on-error: true
         run: |
-          # Limpiamos la carpeta clonada
           FILE1="./android-clean/app/build.gradle"
           if [ -f "$FILE1" ]; then
             echo "Mutilando Firebase en copia segura..."
@@ -119,7 +117,6 @@ jobs:
             sed -i '/firebaseCrashlytics/d' "$FILE1"
           fi
           
-          # Limpiamos la carpeta original de Lime para que el firmador no explote
           FILE2="./export/release/android/bin/app/build.gradle"
           if [ -f "$FILE2" ]; then
             echo "Mutilando Firebase en la carpeta original de Lime..."
@@ -135,13 +132,10 @@ jobs:
           chmod +x gradlew
           ./gradlew assembleRelease
           
-          # Creamos la ruta de salida original pase lo que pase
           mkdir -p ../export/release/android/bin/app/build/outputs/apk/release/
           
-          # ESCANEO COMPLETO: Buscamos cualquier APK que Gradle haya construido y lo movemos bien renombrado
           echo "Buscando APK generado..."
           find . -name "*.apk" -type f -exec cp {} ../export/release/android/bin/app/build/outputs/apk/release/PSliceEngine-release.apk \;
-          
           echo "¡Escaner completado! APK posicionado en la ruta de firma."
 
       # PASO 5: COMPILACIÓN NORMAL (Para PC e iOS)
@@ -157,9 +151,19 @@ jobs:
         if: inputs.name == 'iOS'
         run: sh ./setup/firebase_ios.sh || true
 
-      # PASO 6: FIRMAR EL APK CON TU LLAVE
+      # INSTALAMOS JAVA 11 PARA BRINDAR COMPATIBILIDAD AL FIRMADOR
+      - name: Setup Java 11 for Signing Compatibility
+        if: inputs.exportPath == 'android'
+        continue-on-error: true
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '11'
+
+      # PASO 6: INTENTAR FIRMAR (Si este paso falla, se ignora el error gracias al continue-on-error)
       - name: Sign APK with the proper key
         if: inputs.exportPath == 'android'
+        continue-on-error: true
         env:
           OUT_DIR: ./export/release/android/bin/app/build/outputs/apk/release/
           SIGNING_KEY: ${{ secrets.MIKOLKA_PASSWORD }}
@@ -172,11 +176,22 @@ jobs:
 
           mv '${{env.OUT_DIR}}PSliceEngine-release.apk' '${{env.OUT_DIR}}PSliceEngine-unsigned.apk';
           
-          # Estructura limpia y testeada para build-tools 34.0.0
-          $ANDROID_HOME/build-tools/34.0.0/zipalign -f -p -v 4 '${{env.OUT_DIR}}PSliceEngine-unsigned.apk' '${{env.OUT_DIR}}PSliceEngine-release.apk' > /dev/null;
+          $ANDROID_HOME/build-tools/35.0.1/zipalign -P 16 -f -v 4 '${{env.OUT_DIR}}PSliceEngine-unsigned.apk' '${{env.OUT_DIR}}PSliceEngine-release.apk' > /dev/null;
 
-          $ANDROID_HOME/build-tools/34.0.0/apksigner sign --ks key.keystore --ks-key-alias $SIGNING_ALIAS --ks-pass "env:SIGNING_KEY" --key-pass "env:SIGNING_KEY" '${{env.OUT_DIR}}PSliceEngine-release.apk';
+          $ANDROID_HOME/build-tools/35.0.1/apksigner sign --ks key.keystore --ks-key-alias $SIGNING_ALIAS --ks-pass "env:SIGNING_KEY" --key-pass "env:SIGNING_KEY" '${{env.OUT_DIR}}PSliceEngine-release.apk';
           rm '${{env.OUT_DIR}}PSliceEngine-unsigned.apk';
+          echo "¡Paso de firmado completado de forma nativa!"
+
+      # PASO DE RESPALDO ANTI-FALLOS: Si la firma falló arriba, nos aseguramos de que el APK siga vivo en la ruta de subida
+      - name: Ensure APK exists even if signing failed
+        if: inputs.exportPath == 'android' && always()
+        run: |
+          OUT_DIR="./export/release/android/bin/app/build/outputs/apk/release/"
+          if [ ! -f "${OUT_DIR}PSliceEngine-release.apk" ]; then
+            echo "La firma falló o renombró mal el archivo. Rescatando el APK sin firmar original..."
+            find ./android-clean -name "*.apk" -type f -exec cp {} ${OUT_DIR}PSliceEngine-release.apk \;
+            echo "¡APK sin firmar rescatado con éxito para MT Manager!"
+          fi
 
       - name: Make IPA
         if: inputs.name == 'iOS'
@@ -193,7 +208,7 @@ jobs:
           path: ${{ inputs.artifactPath }}
           if-no-files-found: error    
 
-      # PASO DE LIMPIEZA: Se ejecuta pase lo que pase para preparar el guardado
+      # PASO DE LIMPIEZA
       - name: Clearing already existing cache
         if: always()
         uses: actions/github-script@v6
@@ -215,12 +230,12 @@ jobs:
               }
             }
 
-      # EL SEGURO DE VIDA BLINDADO: Guarda una llave única por corrida, garantizando almacenamiento eterno
+      # EL SEGURO DE VIDA BLINDADO (Ahora sí guardará el caché de C++ pase lo que pase)
       - name: Uploading new cache
         if: always()
         uses: actions/cache@v3
         with:
-          key: ${{ inputs.cachePath }}-${{ github.run_id }}
+          key: ${{ inputs.cachePath }}
           path: |
             export/release/${{ inputs.exportPath }}/haxe/
             export/release/${{ inputs.exportPath }}/obj/

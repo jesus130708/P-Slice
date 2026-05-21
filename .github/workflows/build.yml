@@ -162,7 +162,7 @@ jobs:
           mv '${{env.OUT_DIR}}PSliceEngine-release.apk' '${{env.OUT_DIR}}PSliceEngine-unsigned.apk';
           
           # Usamos 34.0.0 que procesa firmas PKCS12 modernas sin crashear
-          $ANDROID_HOME/build-tools/34.0.0/zipalign -P 16 -f -v 4 '${{env.OUT_DIR}}PSliceEngine-unsigned.apk' '${{env.OUT_DIR}}PSliceEngine-release.apk' > /dev/null;
+          $ANDROID_HOME/build-tools/34.0.0/zipalign -p -f -v 4 '${{env.OUT_DIR}}PSliceEngine-unsigned.apk' '${{env.OUT_DIR}}PSliceEngine-release.apk' > /dev/null;
 
           $ANDROID_HOME/build-tools/34.0.0/apksigner sign --ks key.keystore --ks-key-alias $SIGNING_ALIAS --ks-pass "env:SIGNING_KEY" --key-pass "env:SIGNING_KEY" '${{env.OUT_DIR}}PSliceEngine-release.apk';
           rm '${{env.OUT_DIR}}PSliceEngine-unsigned.apk';

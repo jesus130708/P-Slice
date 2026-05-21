@@ -146,7 +146,7 @@ jobs:
         if: inputs.name == 'iOS'
         run: sh ./setup/firebase_ios.sh || true
 
-      # PASO 6: FIRMAR EL APK CON TU LLAVE (CAMBIADO A BUILD-TOOLS 34.0.0 PARA MATAR EL BUG)
+      # PASO 6: FIRMAR EL APK CON TU LLAVE
       - name: Sign APK with the proper key
         if: inputs.exportPath == 'android'
         env:
@@ -161,8 +161,8 @@ jobs:
 
           mv '${{env.OUT_DIR}}PSliceEngine-release.apk' '${{env.OUT_DIR}}PSliceEngine-unsigned.apk';
           
-          # Usamos 34.0.0 que procesa firmas PKCS12 modernas sin crashear
-          $ANDROID_HOME/build-tools/34.0.0/zipalign -p -f -v 4 '${{env.OUT_DIR}}PSliceEngine-unsigned.apk' '${{env.OUT_DIR}}PSliceEngine-release.apk' > /dev/null;
+          # CORRECCIÓN EN EL ORDEN: -f primero (overwrite) y luego -p (page-align) para que no crashee build-tools 34
+          $ANDROID_HOME/build-tools/34.0.0/zipalign -f -p -v 4 '${{env.OUT_DIR}}PSliceEngine-unsigned.apk' '${{env.OUT_DIR}}PSliceEngine-release.apk' > /dev/null;
 
           $ANDROID_HOME/build-tools/34.0.0/apksigner sign --ks key.keystore --ks-key-alias $SIGNING_ALIAS --ks-pass "env:SIGNING_KEY" --key-pass "env:SIGNING_KEY" '${{env.OUT_DIR}}PSliceEngine-release.apk';
           rm '${{env.OUT_DIR}}PSliceEngine-unsigned.apk';
@@ -190,7 +190,6 @@ jobs:
           script: |
             const caches = await github.rest.actions.getActionsCacheList({
               owner: context.repo.owner,
-              repo: context.repo.owner, // Corregido el mapeo para asegurar ejecución limpia
               repo: context.repo.repo,
             })
             for (const cache of caches.data.actions_caches) {
@@ -216,3 +215,4 @@ jobs:
             export/release/${{ inputs.exportPath }}/obj/
           restore-keys: |
             ${{ inputs.cachePath }}
+            

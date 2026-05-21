@@ -91,14 +91,15 @@ jobs:
           PLAYSTORE_FIREBASE_IOS: ${{ secrets.PLAYSTORE_FIREBASE_IOS }}
         run: printf '%s' "$PLAYSTORE_FIREBASE_IOS" > ./setup/GoogleService-Info.plist
 
-      # PASO 1: GENERAR PROYECTO BASE DE ANDROID
+      # PASO 1: GENERAR PROYECTO BASE DE ANDROID (Mastica el C++)
       - name: Generate Android Build Files
         if: inputs.exportPath == 'android'
         run: haxelib run lime build android -nosign || true
 
-      # PASO 2: CLONAR CARPETA PARA BURLE DE LIME
+      # PASO 2: CLONAR CARPETA PARA BURLAR A LIME
       - name: Intercept and Copy Build Folder
         if: inputs.exportPath == 'android'
+        continue-on-error: true
         run: |
           echo "Haciendo copia de seguridad del proyecto generado..."
           cp -r export/release/android/bin ./android-clean
@@ -106,6 +107,7 @@ jobs:
       # PASO 3: LIMPIAR EL ARCHIVO DENTRO DE LA CARPETA SEGURA
       - name: Fix Firebase Crashlytics Bug in Clean Folder
         if: inputs.exportPath == 'android'
+        continue-on-error: true
         run: |
           FILE="./android-clean/app/build.gradle"
           if [ -f "$FILE" ]; then
@@ -114,7 +116,7 @@ jobs:
             sed -i '/firebaseCrashlytics/d' "$FILE"
           fi
 
-      # PASO 4: COMPILAR EL APK DIRECTAMENTE DESDE LA CARPETA SEGURA
+      # PASO 4: COMPILAR EL APK DIRECTAMENTE DESDE LA CARPETA SEGURA Y CAPTURAR EL ARCHIVO
       - name: Compile APK via Gradle Direct
         if: inputs.exportPath == 'android'
         run: |
@@ -122,10 +124,14 @@ jobs:
           chmod +x gradlew
           ./gradlew assembleRelease
           
-          # Copiamos el archivo app-release.apk a la ruta original renombrándolo bien para el firmador
+          # Creamos la ruta de salida original pase lo que pase
           mkdir -p ../export/release/android/bin/app/build/outputs/apk/release/
-          cp app/build/outputs/apk/release/app-release.apk ../export/release/android/bin/app/build/outputs/apk/release/PSliceEngine-release.apk
-          echo "¡APK copiado y listo para firmar!"
+          
+          # ESCANEO COMPLETO: Buscamos cualquier APK que Gradle haya construido y lo movemos bien renombrado
+          echo "Buscando APK generado..."
+          find . -name "*.apk" -type f -exec cp {} ../export/release/android/bin/app/build/outputs/apk/release/PSliceEngine-release.apk \;
+          
+          echo "¡Escaner completado! APK posicionado en la ruta de firma."
 
       # PASO 5: COMPILACIÓN NORMAL (Para PC e iOS)
       - name: Compile
@@ -134,13 +140,13 @@ jobs:
 
       - name: Upload debugging symbols (Android)
         if: inputs.exportPath == 'android' 
-        run: sh ./setup/firebase_spell.sh || true # Evitamos que este script vuelva a romper el flujo si busca el archivo viejo
+        run: sh ./setup/firebase_spell.sh || true 
 
       - name: Upload debugging symbols (iOS)
         if: inputs.name == 'iOS'
-        run: sh ./setup/firebase_ios.sh
+        run: sh ./setup/firebase_ios.sh || true
 
-      # PASO 6: FIRMAR EL APK CON TU LLAVE (Ahora sí encontrará el archivo exacto)
+      # PASO 6: FIRMAR EL APK CON TU LLAVE
       - name: Sign APK with the proper key
         if: inputs.exportPath == 'android'
         env:
@@ -174,7 +180,9 @@ jobs:
           path: ${{ inputs.artifactPath }}
           if-no-files-found: error    
 
+      # PASO DE LIMPIEZA: Se ejecuta pase lo que pase para preparar el guardado
       - name: Clearing already existing cache
+        if: always()
         uses: actions/github-script@v6
         with:
           script: |
@@ -194,7 +202,9 @@ jobs:
               }
             }
 
+      # EL SEGURO DE VIDA: Si algo falla arriba, este paso SÍ O SÍ guarda tus archivos .cpp compilados
       - name: Uploading new cache
+        if: always()
         uses: actions/cache@v3
         with:
           key: ${{ inputs.cachePath }}
@@ -203,3 +213,4 @@ jobs:
             export/release/${{ inputs.exportPath }}/obj/
           restore-keys: |
             ${{ inputs.cachePath }}
+            

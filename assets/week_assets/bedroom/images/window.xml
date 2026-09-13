@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="window.png">
+	<!-- Created with Adobe Animate version 22.0.0.93 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="window0000" x="0" y="0" width="616" height="449"/>
+	<SubTexture name="window0001" x="616" y="0" width="616" height="449"/>
+	<SubTexture name="window0002" x="616" y="0" width="616" height="449"/>
+	<SubTexture name="window0003" x="1232" y="0" width="616" height="449"/>
+	<SubTexture name="window0004" x="1232" y="0" width="616" height="449"/>
+	<SubTexture name="window0005" x="0" y="0" width="616" height="449"/>
+	<SubTexture name="window0006" x="0" y="0" width="616" height="449"/>
+</TextureAtlas>

@@ -1,2 +1,2 @@
-Future
-Chip
+Legacy
+Vanilla

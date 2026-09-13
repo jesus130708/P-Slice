@@ -1,0 +1,29 @@
+{
+	"storyName": "Danger in the Way",
+	"hideFreeplay": false,
+	"weekBackground": "city",
+	"weekBefore": "week1",
+	"startUnlocked": true,
+	"songs": [
+		[
+			"Darnell",
+			"darnell",
+			[
+				148,
+				22,
+				83
+			]
+		],
+		[
+			"Burning-Rage",
+			"darnell-2",
+			[
+				127,
+				19,
+				73
+			]
+		]
+	],
+	"hideStoryMode": false,
+	"weekName": "Week 2 Duality"
+}

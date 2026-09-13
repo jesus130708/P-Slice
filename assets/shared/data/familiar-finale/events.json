@@ -1,0 +1,254 @@
+{
+	"song": {
+		"speed": 3,
+		"stage": "stage-dearest-3",
+		"player1": "bf-dad",
+		"player2": "dad-fakeout",
+		"player3": null,
+		"events": [
+			[
+				43833.3333333333,
+				[
+					[
+						"Change Character",
+						"1",
+						"dad-angry"
+					]
+				]
+			],
+			[
+				43862.5,
+				[
+					[
+						"Change Character",
+						"2",
+						"gf-dad-angry"
+					]
+				]
+			],
+			[
+				44333.3333333333,
+				[
+					[
+						"Set Cam Zoom",
+						"0.8",
+						""
+					]
+				]
+			],
+			[
+				87916.6666666666,
+				[
+					[
+						"Change Character",
+						"0",
+						"pico-dad"
+					]
+				]
+			],
+			[
+				122583.333333333,
+				[
+					[
+						"Change Character",
+						"0",
+						"spooky-dad"
+					]
+				]
+			],
+			[
+				177110.416666667,
+				[
+					[
+						"Change Character",
+						"1",
+						"dad-mom"
+					]
+				]
+			],
+			[
+				177166.666666667,
+				[
+					[
+						"Change Character",
+						"2",
+						"gf-dad-mom"
+					]
+				]
+			],
+			[
+				177250,
+				[
+					[
+						"Change Character",
+						"0",
+						"mom-dad"
+					]
+				]
+			],
+			[
+				241333.333333334,
+				[
+					[
+						"Set Cam Zoom",
+						"0.9",
+						""
+					]
+				]
+			],
+			[
+				245083.333333334,
+				[
+					[
+						"Change Character",
+						"2",
+						"gf-dad-bf1"
+					]
+				]
+			],
+			[
+				245166.666666667,
+				[
+					[
+						"Change Character",
+						"1",
+						"dad-bf1"
+					]
+				]
+			],
+			[
+				245250.000000001,
+				[
+					[
+						"Change Character",
+						"0",
+						"bf-dad"
+					]
+				]
+			],
+			[
+				288000,
+				[
+					[
+						"Set Cam Zoom",
+						"0.8",
+						""
+					]
+				]
+			],
+			[
+				357333.333333333,
+				[
+					[
+						"Set Cam Zoom",
+						"0.9",
+						""
+					]
+				]
+			],
+			[
+				359999.999999999,
+				[
+					[
+						"Change Character",
+						"2",
+						"gf-dad-bf2"
+					]
+				]
+			],
+			[
+				359999.999999999,
+				[
+					[
+						"Add Camera Flash",
+						"",
+						""
+					]
+				]
+			],
+			[
+				360033.333333333,
+				[
+					[
+						"Change Character",
+						"1",
+						"dad-bf2"
+					]
+				]
+			],
+			[
+				362654.166666666,
+				[
+					[
+						"Add Camera Zoom",
+						"0.025",
+						"0.04"
+					],
+					[
+						"Set Cam Zoom",
+						"0.8",
+						""
+					]
+				]
+			],
+			[
+				362666.666666666,
+				[
+					[
+						"Add Camera Flash",
+						"",
+						""
+					]
+				]
+			],
+			[
+				362683.333333333,
+				[
+					[
+						"Change Character",
+						"2",
+						"gf-dad-bf3"
+					]
+				]
+			],
+			[
+				362693.749999999,
+				[
+					[
+						"Change Character",
+						"2",
+						"gf-dad-bf3"
+					]
+				]
+			],
+			[
+				417872.916666665,
+				[
+					[
+						"Change Character",
+						"1",
+						"dad-evil"
+					]
+				]
+			],
+			[
+				417916.666666665,
+				[
+					[
+						"Change Character",
+						"2",
+						"gf-dad-evil"
+					]
+				]
+			]
+		],
+		"notes": [],
+		"splashSkin": null,
+		"validScore": false,
+		"gfVersion": "gf-dad-fakeout",
+		"bpm": 180,
+		"arrowSkin": null,
+		"needsVoices": true,
+		"song": "Familiar-Finale"
+	}
+}

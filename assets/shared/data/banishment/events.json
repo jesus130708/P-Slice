@@ -1,0 +1,61 @@
+{
+	"song": {
+		"events": [
+			[
+				22500,
+				[
+					[
+						"Change Character",
+						"bf",
+						"bf-glitch"
+					],
+					[
+						"Change Character",
+						"dad",
+						"spirit-sad"
+					]
+				]
+			],
+			[
+				180617.647058823,
+				[
+					[
+						"Change Character",
+						"dad",
+						"spirit"
+					],
+					[
+						"Black and White",
+						"0",
+						""
+					]
+				]
+			],
+			[
+				203286.764705882,
+				[
+					[
+						"Set Camera Zoom",
+						"0.8",
+						""
+					],
+					[
+						"Change Character",
+						"dad",
+						"spirit-sad"
+					],
+					[
+						"Screen Shake",
+						"0.5",
+						""
+					],
+					[
+						"Black and White",
+						"1",
+						""
+					]
+				]
+			]
+		]
+	}
+}

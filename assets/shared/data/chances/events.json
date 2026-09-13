@@ -1,0 +1,306 @@
+{
+	"song": {
+		"events": [
+			[
+				18000,
+				[
+					[
+						"Set Camera Zoom",
+						"1.15",
+						"1"
+					]
+				]
+			],
+			[
+				19200,
+				[
+					[
+						"Zoom Per Beat",
+						"1",
+						"1"
+					],
+					[
+						"Add Camera Flash",
+						"",
+						"BLACK"
+					],
+					[
+						"Set Camera Zoom",
+						"0.8",
+						""
+					]
+				]
+			],
+			[
+				38400,
+				[
+					[
+						"Set Camera Zoom",
+						"0.9",
+						""
+					],
+					[
+						"Add Camera Flash",
+						"",
+						"BLACK"
+					]
+				]
+			],
+			[
+				57600,
+				[
+					[
+						"Set Camera Zoom",
+						"1.5",
+						"3.5"
+					]
+				]
+			],
+			[
+				86400,
+				[
+					[
+						"Set Camera Zoom",
+						"0.8",
+						"2"
+					],
+					[
+						"Change Character",
+						"bf",
+						"bf-spirit-player-alt"
+					],
+					[
+						"Change Character",
+						"dad",
+						"dad-chances"
+					],
+					[
+						"Zoom Per Beat",
+						"1",
+						"1"
+					]
+				]
+			],
+			[
+				96000,
+				[
+					[
+						"Set Camera Zoom",
+						"0.9",
+						"2"
+					]
+				]
+			],
+			[
+				115200,
+				[
+					[
+						"Set Camera Zoom",
+						"0.8",
+						"2"
+					],
+					[
+						"Zoom Per Beat",
+						"2",
+						"1"
+					]
+				]
+			],
+			[
+				124800,
+				[
+					[
+						"Set Camera Zoom",
+						"0.9",
+						"2"
+					],
+					[
+						"Zoom Per Beat",
+						"1",
+						""
+					]
+				]
+			],
+			[
+				152400,
+				[
+					[
+						"Zoom Per Beat",
+						"0",
+						"1"
+					],
+					[
+						"Set Camera Zoom",
+						"1.15",
+						""
+					]
+				]
+			],
+			[
+				153600,
+				[
+					[
+						"Zoom Per Beat",
+						"2",
+						"1"
+					],
+					[
+						"Set Camera Zoom",
+						"0.8",
+						"2"
+					],
+					[
+						"Add Camera Flash",
+						"",
+						""
+					]
+				]
+			],
+			[
+				172800,
+				[
+					[
+						"Set Camera Zoom",
+						"0.9",
+						"2"
+					],
+					[
+						"Zoom Per Beat",
+						"1",
+						"1"
+					]
+				]
+			],
+			[
+				221100,
+				[
+					[
+						"Set Camera Zoom",
+						"0.8",
+						"2"
+					]
+				]
+			],
+			[
+				238800,
+				[
+					[
+						"Zoom Per Beat",
+						"0",
+						"1"
+					]
+				]
+			],
+			[
+				239400,
+				[
+					[
+						"Set Camera Zoom",
+						"1.15",
+						""
+					]
+				]
+			],
+			[
+				240000,
+				[
+					[
+						"Set Camera Zoom",
+						"0.9",
+						"2"
+					],
+					[
+						"Add Camera Flash",
+						"",
+						""
+					],
+					[
+						"Zoom Per Beat",
+						"1",
+						"1"
+					]
+				]
+			],
+			[
+				249600,
+				[
+					[
+						"Zoom Per Beat",
+						"2",
+						"1"
+					],
+					[
+						"Set Camera Zoom",
+						"0.8",
+						"2"
+					]
+				]
+			],
+			[
+				268800,
+				[
+					[
+						"Set Camera Zoom",
+						"0.9",
+						"2"
+					],
+					[
+						"Zoom Per Beat",
+						"0",
+						"1"
+					]
+				]
+			],
+			[
+				278400,
+				[
+					[
+						"Idle On Beat",
+						"true",
+						""
+					],
+					[
+						"Zoom Per Beat",
+						"1",
+						"1"
+					],
+					[
+						"Set Camera Zoom",
+						"0.8",
+						"2"
+					],
+					[
+						"Add Camera Flash",
+						"",
+						""
+					]
+				]
+			],
+			[
+				307200,
+				[
+					[
+						"Idle On Beat",
+						"false",
+						""
+					],
+					[
+						"Set Camera Zoom",
+						"1",
+						"2"
+					],
+					[
+						"Zoom Per Beat",
+						"0",
+						"1"
+					],
+					[
+						"Add Camera Flash",
+						"",
+						""
+					]
+				]
+			]
+		]
+	}
+}

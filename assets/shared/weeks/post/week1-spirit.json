@@ -1,0 +1,39 @@
+{
+	"storyName": "Daddy Dearest.",
+	"hideFreeplay": false,
+	"weekBackground": "post",
+	"weekBefore": "tutorial-post",
+	"startUnlocked": true,
+	"songs": [
+		[
+			"Bopeebo",
+			"dad-post",
+			[
+				148,
+				22,
+				83
+			]
+		],
+		[
+			"Fresh",
+			"dad-post",
+			[
+				127,
+				19,
+				73
+			]
+		],
+		[
+			"Dad-Battle",
+			"dad-post",
+			[
+				127,
+				19,
+				73
+			]
+		]
+	],
+	"hideStoryMode": false,
+	"difficulties": "Spiritual",
+	"weekName": "Week 1 Aftermath"
+}

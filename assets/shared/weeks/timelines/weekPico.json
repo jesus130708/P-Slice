@@ -1,0 +1,20 @@
+{
+	"storyName": "Duality",
+	"hideFreeplay": false,
+	"weekBackground": "alley",
+	"weekBefore": "week6",
+	"startUnlocked": true,
+	"songs": [
+		[
+			"Wretched",
+			"senpai-wretched2",
+			[
+				20,
+				29,
+				95
+			]
+		]
+	],
+	"hideStoryMode": false,
+	"weekName": "Week 7 Duality"
+}

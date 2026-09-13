@@ -1,0 +1,56 @@
+{
+	"storyName": "Another Chance...",
+	"hideFreeplay": false,
+	"weekBackground": "",
+	"weekBefore": "week6",
+	"startUnlocked": true,
+	"songs": [
+		[
+			"Savestate",
+			"spirit-angry-pixel",
+			[
+				148,
+				22,
+				83
+			]
+		],
+		[
+			"Chances",
+			"dad-shadow",
+			[
+				19,
+				19,
+				19
+			]
+		],
+		[
+			"Final-Tempest",
+			"trio",
+			[
+				160,
+				193,
+				80
+			]
+		],
+		[
+			"Face-Off",
+			"monster",
+			[
+				175,
+				135,
+				15
+			]
+		],
+		[
+			"Monology",
+			"bf-narrator",
+			[
+				19,
+				19,
+				59
+			]
+		]
+	],
+	"hideStoryMode": false,
+	"weekName": "Week 7"
+}

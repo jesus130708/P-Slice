@@ -1,0 +1,31 @@
+{
+	"song": {
+		"events": [
+			[
+				1825.96153846154,
+				[
+					[
+						"Play Animation",
+						"reload",
+						"bf"
+					]
+				]
+			],
+			[
+				2653.84615384615,
+				[
+					[
+						"Play Animation",
+						"shoot",
+						"bf"
+					],
+					[
+						"Play Animation",
+						"dodge",
+						"dad"
+					]
+				]
+			]
+		]
+	}
+}

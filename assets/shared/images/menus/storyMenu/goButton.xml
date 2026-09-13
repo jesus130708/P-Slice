@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="go.png">
+	<!-- Created with Adobe Animate version 22.0.6.202 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="goPress0000" x="0" y="0" width="457" height="272" frameX="-52" frameY="-30" frameWidth="562" frameHeight="329"/>
+	<SubTexture name="goPress0001" x="457" y="0" width="562" height="329"/>
+	<SubTexture name="goPress0002" x="457" y="0" width="562" height="329"/>
+	<SubTexture name="goPress0003" x="0" y="329" width="518" height="299" frameX="-22" frameY="-16" frameWidth="562" frameHeight="329"/>
+	<SubTexture name="goPress0004" x="0" y="329" width="518" height="299" frameX="-22" frameY="-16" frameWidth="562" frameHeight="329"/>
+	<SubTexture name="goPress0005" x="0" y="628" width="518" height="307" frameX="-22" frameY="-12" frameWidth="562" frameHeight="329"/>
+	<SubTexture name="goPress0006" x="0" y="628" width="518" height="307" frameX="-22" frameY="-12" frameWidth="562" frameHeight="329"/>
+	<SubTexture name="goPress0007" x="0" y="628" width="518" height="307" frameX="-22" frameY="-12" frameWidth="562" frameHeight="329"/>
+	<SubTexture name="goPress0008" x="0" y="628" width="518" height="307" frameX="-22" frameY="-12" frameWidth="562" frameHeight="329"/>
+	<SubTexture name="goPress0009" x="0" y="628" width="518" height="307" frameX="-22" frameY="-12" frameWidth="562" frameHeight="329"/>
+	<SubTexture name="goPress0010" x="0" y="628" width="518" height="307" frameX="-22" frameY="-12" frameWidth="562" frameHeight="329"/>
+</TextureAtlas>

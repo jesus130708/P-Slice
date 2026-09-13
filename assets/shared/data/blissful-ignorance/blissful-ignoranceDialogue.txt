@@ -1,0 +1,9 @@
+:bf:Beep.
+:senpai:Oh?
+:senpai:Ah, hello! You are an unfamiliar face...
+:senpai:Are you new here, by chance?
+:bf:trace("...too bright.");
+:senpai:Hm? What was that?
+:bf:trace("It's all bright. Too bright.");
+:senpai:I don't quite understand..?
+:senpai:Ah, you have a microphone. A song, then?

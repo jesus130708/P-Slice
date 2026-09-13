@@ -1,0 +1,38 @@
+{
+	"storyName": "Target Spotted.",
+	"hideFreeplay": false,
+	"weekBackground": "limo",
+	"weekBefore": "week1",
+	"startUnlocked": true,
+	"songs": [
+		[
+			"Satin-Savagery",
+			"mom-1",
+			[
+				75,
+				0,
+				60
+			]
+		],
+		[
+			"Dispatch",
+			"mom-2",
+			[
+				75,
+				0,
+				60
+			]
+		],
+		[
+			"Glammed",
+			"mom-angry",
+			[
+				75,
+				0,
+				60
+			]
+		]
+	],
+	"hideStoryMode": false,
+	"weekName": "Week 2"
+}

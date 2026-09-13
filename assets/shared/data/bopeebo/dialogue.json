@@ -1,0 +1,88 @@
+{
+	"dialogue": [
+		{
+			"expression": "annoyed",
+			"text": "...",
+			"boxState": "normal",
+			"portrait": "dd-post",
+			"speed": 0.05
+		},
+		{
+			"expression": "talk",
+			"text": "Well well, if it isn't 'Boyfriend' himself!\\nHanging around my daughter as usual, eh?",
+			"boxState": "normal",
+			"speed": 0.05,
+			"portrait": "dd-post"
+		},
+		{
+			"expression": "bothered",
+			"text": "(Oh, god. Why did I have to run into HIM of all people today?)",
+			"boxState": "normal",
+			"portrait": "bf-post",
+			"speed": 0.05
+		},
+		{
+			"expression": "bothered",
+			"text": "(I swear, it's like he LOVES to make this harder than it has to be sometimes...)",
+			"boxState": "normal",
+			"portrait": "bf-post",
+			"speed": 0.05
+		},
+		{
+			"expression": "huh",
+			"text": "Yeah, i'm hanging out with my Girlfriend. Got a problem with it, old man?",
+			"boxState": "normal",
+			"portrait": "bf-post",
+			"speed": 0.035
+		},
+		{
+			"expression": "annoyed",
+			"text": "Damn right I have a problem with it, runt.\\nYou're not even QUALIFIED to be dating her.",
+			"boxState": "normal",
+			"portrait": "dd-post",
+			"speed": 0.05
+		},
+		{
+			"expression": "worried",
+			"text": "Dad, quit it!",
+			"boxState": "normal",
+			"portrait": "gf-post",
+			"speed": 0.05
+		},
+		{
+			"expression": "talk",
+			"text": "No, i've put up with him for long enough!",
+			"boxState": "normal",
+			"portrait": "dd-post",
+			"speed": 0.05
+		},
+		{
+			"expression": "annoyed",
+			"text": "It's about time I put 'em in his place...",
+			"boxState": "normal",
+			"portrait": "dd-post",
+			"speed": 0.05
+		},
+		{
+			"expression": "talk",
+			"text": "You're gonna have to rap against me again if you want to prove you're worthy enough to date my little girl.",
+			"boxState": "normal",
+			"portrait": "dd-post",
+			"speed": 0.035
+		},
+		{
+			"expression": "huh",
+			"text": "...",
+			"boxState": "normal",
+			"portrait": "bf-post",
+			"speed": 0.05
+		},
+		{
+			"expression": "talk",
+			"text": "You know what? You're on!",
+			"boxState": "normal",
+			"portrait": "bf-post",
+			"speed": 0.05
+		}
+	]
+}

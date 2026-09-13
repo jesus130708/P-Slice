@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="PostSBF.png">
+	<!-- Created with Adobe Animate version 22.0.5.191 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="BF bothered0000" x="0" y="0" width="339" height="524"/>
+	<SubTexture name="BF bothered0001" x="0" y="0" width="339" height="524"/>
+	<SubTexture name="BF bothered0002" x="339" y="0" width="339" height="524"/>
+	<SubTexture name="BF bothered0003" x="339" y="0" width="339" height="524"/>
+	<SubTexture name="BF bothered0004" x="678" y="0" width="339" height="524"/>
+	<SubTexture name="BF bothered0005" x="678" y="0" width="339" height="524"/>
+	<SubTexture name="BF bothered loop0000" x="1017" y="0" width="333" height="516"/>
+	<SubTexture name="BF bothered loop0001" x="1017" y="0" width="333" height="516"/>
+	<SubTexture name="BF bothered loop0002" x="1017" y="0" width="333" height="516"/>
+	<SubTexture name="BF bothered loop0003" x="1017" y="0" width="333" height="516"/>
+	<SubTexture name="BF bothered loop0004" x="1017" y="0" width="333" height="516"/>
+	<SubTexture name="BF bothered loop0005" x="1017" y="0" width="333" height="516"/>
+	<SubTexture name="BF huh0000" x="1350" y="0" width="339" height="524"/>
+	<SubTexture name="BF huh0001" x="1350" y="0" width="339" height="524"/>
+	<SubTexture name="BF huh0002" x="1689" y="0" width="339" height="524"/>
+	<SubTexture name="BF huh0003" x="1689" y="0" width="339" height="524"/>
+	<SubTexture name="BF huh0004" x="0" y="524" width="339" height="524"/>
+	<SubTexture name="BF huh0005" x="0" y="524" width="339" height="524"/>
+	<SubTexture name="BF huh loop0000" x="339" y="524" width="333" height="516"/>
+	<SubTexture name="BF huh loop0001" x="339" y="524" width="333" height="516"/>
+	<SubTexture name="BF huh loop0002" x="339" y="524" width="333" height="516"/>
+	<SubTexture name="BF huh loop0003" x="339" y="524" width="333" height="516"/>
+	<SubTexture name="BF huh loop0004" x="339" y="524" width="333" height="516"/>
+	<SubTexture name="BF huh loop0005" x="339" y="524" width="333" height="516"/>
+	<SubTexture name="BF look down0000" x="672" y="524" width="333" height="521"/>
+	<SubTexture name="BF look down0001" x="672" y="524" width="333" height="521"/>
+	<SubTexture name="BF look down0002" x="1005" y="524" width="333" height="521"/>
+	<SubTexture name="BF look down0003" x="1005" y="524" width="333" height="521"/>
+	<SubTexture name="BF look down0004" x="1338" y="524" width="333" height="521"/>
+	<SubTexture name="BF look down0005" x="1338" y="524" width="333" height="521"/>
+	<SubTexture name="BF look down loop0000" x="1671" y="524" width="333" height="514"/>
+	<SubTexture name="BF look down loop0001" x="1671" y="524" width="333" height="514"/>
+	<SubTexture name="BF look down loop0002" x="1671" y="524" width="333" height="514"/>
+	<SubTexture name="BF look down loop0003" x="1671" y="524" width="333" height="514"/>
+	<SubTexture name="BF look down loop0004" x="1671" y="524" width="333" height="514"/>
+	<SubTexture name="BF look down loop0005" x="1671" y="524" width="333" height="514"/>
+	<SubTexture name="BF talk0000" x="0" y="1048" width="339" height="524"/>
+	<SubTexture name="BF talk0001" x="0" y="1048" width="339" height="524"/>
+	<SubTexture name="BF talk0002" x="339" y="1048" width="339" height="524"/>
+	<SubTexture name="BF talk0003" x="339" y="1048" width="339" height="524"/>
+	<SubTexture name="BF talk0004" x="678" y="1048" width="339" height="524"/>
+	<SubTexture name="BF talk0005" x="678" y="1048" width="339" height="524"/>
+	<SubTexture name="BF talk loop0000" x="1017" y="1048" width="333" height="516"/>
+	<SubTexture name="BF talk loop0001" x="1017" y="1048" width="333" height="516"/>
+	<SubTexture name="BF talk loop0002" x="1017" y="1048" width="333" height="516"/>
+	<SubTexture name="BF talk loop0003" x="1017" y="1048" width="333" height="516"/>
+	<SubTexture name="BF talk loop0004" x="1017" y="1048" width="333" height="516"/>
+	<SubTexture name="BF talk loop0005" x="1017" y="1048" width="333" height="516"/>
+</TextureAtlas>

@@ -1,0 +1,711 @@
+{
+	"song": {
+		"events": [
+			[
+				62875,
+				[
+					[
+						"Set Camera Zoom",
+						"1.4",
+						""
+					]
+				]
+			],
+			[
+				80000,
+				[
+					[
+						"Change Character",
+						"bf",
+						"bf-deadEnd"
+					],
+					[
+						"Change Character",
+						"dad",
+						"gf-deadEnd-dark"
+					]
+				]
+			],
+			[
+				108000,
+				[
+					[
+						"Set Camera Zoom",
+						"1",
+						""
+					],
+					[
+						"Add Camera Flash",
+						"",
+						""
+					],
+					[
+						"Change Character",
+						"dad",
+						"gf-deadEnd"
+					],
+					[
+						"Change Character",
+						"gf",
+						"spooky-deadEnd"
+					]
+				]
+			],
+			[
+				164000,
+				[
+					[
+						"Add Camera Flash",
+						"",
+						""
+					],
+					[
+						"Change Character",
+						"bf",
+						"bf-deadEnd2"
+					],
+					[
+						"Change Character",
+						"dad",
+						"gf-confident"
+					]
+				]
+			],
+			[
+				172000,
+				[
+					[
+						"Set Camera Zoom",
+						"1.4",
+						""
+					]
+				]
+			],
+			[
+				180000,
+				[
+					[
+						"Set Camera Zoom",
+						"1.5",
+						""
+					]
+				]
+			],
+			[
+				188000,
+				[
+					[
+						"Set Camera Zoom",
+						"1",
+						""
+					]
+				]
+			],
+			[
+				196000,
+				[
+					[
+						"Set Camera Zoom",
+						"1.5",
+						""
+					]
+				]
+			],
+			[
+				212625,
+				[
+					[
+						"Play Animation",
+						"itsGrover",
+						"gf"
+					],
+					[
+						"Play Animation",
+						"itsGrover",
+						"dad"
+					]
+				]
+			],
+			[
+				212843.75,
+				[
+					[
+						"Set Camera Zoom",
+						"1.7",
+						""
+					]
+				]
+			],
+			[
+				213000,
+				[
+					[
+						"Add Camera Flash",
+						"",
+						""
+					]
+				]
+			],
+			[
+				213500,
+				[
+					[
+						"Change Character",
+						"bf",
+						"bf-deadEnd"
+					],
+					[
+						"Change Character",
+						"dad",
+						"gf-tired"
+					],
+					[
+						"Change Character",
+						"gf",
+						"spooky-deadEnd2"
+					]
+				]
+			],
+			[
+				214000,
+				[
+					[
+						"Set Camera Zoom",
+						"1",
+						""
+					]
+				]
+			],
+			[
+				229000,
+				[
+					[
+						"Add Camera Flash",
+						"",
+						""
+					]
+				]
+			],
+			[
+				237000,
+				[
+					[
+						"Set Camera Zoom",
+						"1.4",
+						""
+					]
+				]
+			],
+			[
+				245000,
+				[
+					[
+						"Set Camera Zoom",
+						"1",
+						""
+					]
+				]
+			],
+			[
+				245250,
+				[
+					[
+						"Play Animation",
+						"dodge",
+						"dad"
+					]
+				]
+			],
+			[
+				246000,
+				[
+					[
+						"Play Animation",
+						"dodge",
+						"dad"
+					]
+				]
+			],
+			[
+				246750,
+				[
+					[
+						"Play Animation",
+						"dodge",
+						"dad"
+					]
+				]
+			],
+			[
+				247500,
+				[
+					[
+						"Play Animation",
+						"dodge",
+						"dad"
+					]
+				]
+			],
+			[
+				247750,
+				[
+					[
+						"Play Animation",
+						"dodge",
+						"dad"
+					]
+				]
+			],
+			[
+				248000,
+				[
+					[
+						"Play Animation",
+						"dodge",
+						"dad"
+					]
+				]
+			],
+			[
+				248250,
+				[
+					[
+						"Play Animation",
+						"dodge",
+						"dad"
+					]
+				]
+			],
+			[
+				249250,
+				[
+					[
+						"Play Animation",
+						"dodge",
+						"dad"
+					]
+				]
+			],
+			[
+				250000,
+				[
+					[
+						"Play Animation",
+						"dodge",
+						"dad"
+					]
+				]
+			],
+			[
+				250750,
+				[
+					[
+						"Play Animation",
+						"dodge",
+						"dad"
+					]
+				]
+			],
+			[
+				251500,
+				[
+					[
+						"Play Animation",
+						"dodge",
+						"dad"
+					]
+				]
+			],
+			[
+				251750,
+				[
+					[
+						"Play Animation",
+						"dodge",
+						"dad"
+					]
+				]
+			],
+			[
+				252000,
+				[
+					[
+						"Play Animation",
+						"dodge",
+						"dad"
+					]
+				]
+			],
+			[
+				252250,
+				[
+					[
+						"Play Animation",
+						"dodge",
+						"dad"
+					]
+				]
+			],
+			[
+				253250,
+				[
+					[
+						"Play Animation",
+						"dodge",
+						"dad"
+					]
+				]
+			],
+			[
+				254000,
+				[
+					[
+						"Play Animation",
+						"dodge",
+						"dad"
+					]
+				]
+			],
+			[
+				254750,
+				[
+					[
+						"Play Animation",
+						"dodge",
+						"dad"
+					]
+				]
+			],
+			[
+				255500,
+				[
+					[
+						"Play Animation",
+						"dodge",
+						"dad"
+					]
+				]
+			],
+			[
+				256000,
+				[
+					[
+						"Play Animation",
+						"dodge",
+						"dad"
+					]
+				]
+			],
+			[
+				256250,
+				[
+					[
+						"Play Animation",
+						"dodge",
+						"dad"
+					]
+				]
+			],
+			[
+				256500,
+				[
+					[
+						"Play Animation",
+						"dodge",
+						"dad"
+					]
+				]
+			],
+			[
+				256750,
+				[
+					[
+						"Play Animation",
+						"dodge",
+						"dad"
+					]
+				]
+			],
+			[
+				257250,
+				[
+					[
+						"Play Animation",
+						"dodge",
+						"dad"
+					]
+				]
+			],
+			[
+				258000,
+				[
+					[
+						"Play Animation",
+						"dodge",
+						"dad"
+					]
+				]
+			],
+			[
+				258750,
+				[
+					[
+						"Play Animation",
+						"dodge",
+						"dad"
+					]
+				]
+			],
+			[
+				259500,
+				[
+					[
+						"Play Animation",
+						"dodge",
+						"dad"
+					]
+				]
+			],
+			[
+				260000,
+				[
+					[
+						"Play Animation",
+						"dodge",
+						"dad"
+					]
+				]
+			],
+			[
+				260500,
+				[
+					[
+						"Play Animation",
+						"dodge",
+						"dad"
+					]
+				]
+			],
+			[
+				261000,
+				[
+					[
+						"Change Character",
+						"dad",
+						"gf-tired2"
+					],
+					[
+						"Change Character",
+						"gf",
+						"spooky-deadEnd3"
+					],
+					[
+						"Add Camera Flash",
+						"",
+						""
+					]
+				]
+			],
+			[
+				269250,
+				[
+					[
+						"Play Animation",
+						"dodge",
+						"dad"
+					]
+				]
+			],
+			[
+				270000,
+				[
+					[
+						"Play Animation",
+						"dodge",
+						"dad"
+					]
+				]
+			],
+			[
+				270750,
+				[
+					[
+						"Play Animation",
+						"dodge",
+						"dad"
+					]
+				]
+			],
+			[
+				271500,
+				[
+					[
+						"Play Animation",
+						"dodge",
+						"dad"
+					]
+				]
+			],
+			[
+				272000,
+				[
+					[
+						"Play Animation",
+						"dodge",
+						"dad"
+					]
+				]
+			],
+			[
+				273250,
+				[
+					[
+						"Play Animation",
+						"dodge",
+						"dad"
+					]
+				]
+			],
+			[
+				274000,
+				[
+					[
+						"Play Animation",
+						"dodge",
+						"dad"
+					]
+				]
+			],
+			[
+				274750,
+				[
+					[
+						"Play Animation",
+						"dodge",
+						"dad"
+					]
+				]
+			],
+			[
+				275500,
+				[
+					[
+						"Play Animation",
+						"dodge",
+						"dad"
+					]
+				]
+			],
+			[
+				276000,
+				[
+					[
+						"Play Animation",
+						"dodge",
+						"dad"
+					]
+				]
+			],
+			[
+				276125,
+				[
+					[
+						"Play Animation",
+						"dodge",
+						"dad"
+					]
+				]
+			],
+			[
+				276375,
+				[
+					[
+						"Play Animation",
+						"dodge",
+						"dad"
+					]
+				]
+			],
+			[
+				276500,
+				[
+					[
+						"Play Animation",
+						"dodge",
+						"dad"
+					]
+				]
+			],
+			[
+				276750,
+				[
+					[
+						"Play Animation",
+						"dodge",
+						"dad"
+					]
+				]
+			],
+			[
+				276875,
+				[
+					[
+						"Play Animation",
+						"dodge",
+						"dad"
+					]
+				]
+			],
+			[
+				277000,
+				[
+					[
+						"Play Animation",
+						"dodge",
+						"dad"
+					]
+				]
+			],
+			[
+				281000,
+				[
+					[
+						"Set Camera Zoom",
+						"1.5",
+						""
+					]
+				]
+			],
+			[
+				285000,
+				[
+					[
+						"Set Camera Zoom",
+						"1.6",
+						""
+					]
+				]
+			],
+			[
+				286000,
+				[
+					[
+						"Set Camera Zoom",
+						"1.7",
+						""
+					]
+				]
+			],
+			[
+				294000,
+				[
+					[
+						"Add Camera Flash",
+						"",
+						""
+					]
+				]
+			]
+		]
+	}
+}

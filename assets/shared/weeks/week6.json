@@ -1,0 +1,38 @@
+{
+	"storyName": "The Last One...",
+	"hideFreeplay": false,
+	"weekBackground": "stage",
+	"weekBefore": "week5",
+	"startUnlocked": true,
+	"songs": [
+		[
+			"Bedeviled",
+			"dad-1",
+			[
+				126,
+				73,
+				153
+			]
+		],
+		[
+			"Despondency",
+			"dad-2",
+			[
+				126,
+				73,
+				133
+			]
+		],
+		[
+			"Familiar-finale",
+			"dad-fakeout",
+			[
+				66,
+				33,
+				113
+			]
+		]
+	],
+	"hideStoryMode": false,
+	"weekName": "Week 6"
+}

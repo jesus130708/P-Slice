@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="emergencymeetingalert.png">
+	<!-- Created with Adobe Animate version 22.0.5.191 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="NOTIFICATION0000" x="0" y="0" width="1607" height="1102"/>
+	<SubTexture name="NOTIFICATION0001" x="0" y="0" width="1607" height="1102"/>
+	<SubTexture name="NOTIFICATION0002" x="1607" y="0" width="1607" height="1102"/>
+	<SubTexture name="NOTIFICATION0003" x="1607" y="0" width="1607" height="1102"/>
+	<SubTexture name="NOTIFICATION0004" x="3214" y="0" width="1607" height="1102"/>
+	<SubTexture name="NOTIFICATION0005" x="3214" y="0" width="1607" height="1102"/>
+	<SubTexture name="NOTIFICATION0006" x="4821" y="0" width="1607" height="1102"/>
+	<SubTexture name="NOTIFICATION0007" x="4821" y="0" width="1607" height="1102"/>
+	<SubTexture name="NOTIFICATION0008" x="4821" y="0" width="1607" height="1102"/>
+	<SubTexture name="NOTIFICATION0009" x="4821" y="0" width="1607" height="1102"/>
+	<SubTexture name="NOTIFICATION0010" x="4821" y="0" width="1607" height="1102"/>
+	<SubTexture name="NOTIFICATION0011" x="4821" y="0" width="1607" height="1102"/>
+	<SubTexture name="NOTIFICATION0012" x="4821" y="0" width="1607" height="1102"/>
+	<SubTexture name="NOTIFICATION0013" x="4821" y="0" width="1607" height="1102"/>
+	<SubTexture name="NOTIFICATION0014" x="4821" y="0" width="1607" height="1102"/>
+	<SubTexture name="NOTIFICATION0015" x="4821" y="0" width="1607" height="1102"/>
+	<SubTexture name="NOTIFICATION0016" x="4821" y="0" width="1607" height="1102"/>
+	<SubTexture name="NOTIFICATION0017" x="4821" y="0" width="1607" height="1102"/>
+	<SubTexture name="NOTIFICATION0018" x="4821" y="0" width="1607" height="1102"/>
+	<SubTexture name="NOTIFICATION0019" x="4821" y="0" width="1607" height="1102"/>
+	<SubTexture name="NOTIFICATION0020" x="4821" y="0" width="1607" height="1102"/>
+	<SubTexture name="NOTIFICATION0021" x="4821" y="0" width="1607" height="1102"/>
+	<SubTexture name="NOTIFICATION0022" x="4821" y="0" width="1607" height="1102"/>
+	<SubTexture name="NOTIFICATION0023" x="4821" y="0" width="1607" height="1102"/>
+	<SubTexture name="NOTIFICATION0024" x="4821" y="0" width="1607" height="1102"/>
+	<SubTexture name="NOTIFICATION0025" x="4821" y="0" width="1607" height="1102"/>
+	<SubTexture name="NOTIFICATION0026" x="4821" y="0" width="1607" height="1102"/>
+	<SubTexture name="NOTIFICATION0027" x="4821" y="0" width="1607" height="1102"/>
+	<SubTexture name="NOTIFICATION0028" x="4821" y="0" width="1607" height="1102"/>
+	<SubTexture name="NOTIFICATION0029" x="4821" y="0" width="1607" height="1102"/>
+	<SubTexture name="NOTIFICATION0030" x="4821" y="0" width="1607" height="1102"/>
+	<SubTexture name="NOTIFICATION0031" x="4821" y="0" width="1607" height="1102"/>
+	<SubTexture name="NOTIFICATION0032" x="4821" y="0" width="1607" height="1102"/>
+	<SubTexture name="NOTIFICATION0033" x="4821" y="0" width="1607" height="1102"/>
+	<SubTexture name="NOTIFICATION0034" x="4821" y="0" width="1607" height="1102"/>
+	<SubTexture name="NOTIFICATION0035" x="4821" y="0" width="1607" height="1102"/>
+	<SubTexture name="NOTIFICATION0036" x="4821" y="0" width="1607" height="1102"/>
+	<SubTexture name="NOTIFICATION0037" x="4821" y="0" width="1607" height="1102"/>
+	<SubTexture name="NOTIFICATION0038" x="4821" y="0" width="1607" height="1102"/>
+	<SubTexture name="NOTIFICATION0039" x="4821" y="0" width="1607" height="1102"/>
+	<SubTexture name="NOTIFICATION0040" x="4821" y="0" width="1607" height="1102"/>
+	<SubTexture name="NOTIFICATION0041" x="4821" y="0" width="1607" height="1102"/>
+	<SubTexture name="NOTIFICATION0042" x="4821" y="0" width="1607" height="1102"/>
+	<SubTexture name="NOTIFICATION0043" x="4821" y="0" width="1607" height="1102"/>
+	<SubTexture name="NOTIFICATION0044" x="6428" y="0" width="1607" height="1102"/>
+	<SubTexture name="NOTIFICATION0045" x="0" y="1102" width="1607" height="1102"/>
+	<SubTexture name="NOTIFICATION0046" x="1607" y="1102" width="1607" height="1102"/>
+	<SubTexture name="NOTIFICATION0047" x="3214" y="1102" width="1607" height="1102"/>
+	<SubTexture name="NOTIFICATION0048" x="4821" y="1102" width="1607" height="1102"/>
+	<SubTexture name="NOTIFICATION0049" x="6428" y="1102" width="1607" height="1102"/>
+	<SubTexture name="NOTIFICATION0050" x="0" y="2204" width="1607" height="1102"/>
+	<SubTexture name="NOTIFICATION0051" x="1607" y="2204" width="1607" height="1102"/>
+	<SubTexture name="NOTIFICATION0052" x="1607" y="2204" width="1607" height="1102"/>
+	<SubTexture name="NOTIFICATION0053" x="1607" y="2204" width="1607" height="1102"/>
+	<SubTexture name="NOTIFICATION0054" x="1607" y="2204" width="1607" height="1102"/>
+	<SubTexture name="NOTIFICATION0055" x="1607" y="2204" width="1607" height="1102"/>
+	<SubTexture name="NOTIFICATION0056" x="1607" y="2204" width="1607" height="1102"/>
+	<SubTexture name="NOTIFICATION0057" x="1607" y="2204" width="1607" height="1102"/>
+	<SubTexture name="NOTIFICATION0058" x="1607" y="2204" width="1607" height="1102"/>
+</TextureAtlas>

@@ -1,0 +1,21 @@
+{
+	"song": {
+		"events": [
+			[
+				134666.666666667,
+				[
+					[
+						"Set Property",
+						"camHUD.alpha",
+						"0"
+					],
+					[
+						"Set Property",
+						"camGame.alpha",
+						"0"
+					]
+				]
+			]
+		]
+	}
+}

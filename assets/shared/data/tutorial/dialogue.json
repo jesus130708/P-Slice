@@ -1,0 +1,46 @@
+{
+	"dialogue": [
+		{
+			"expression": "talk",
+			"text": "A small, blue haired man steps onto the stage, looking up towards his girlfriend with a look of uncertainty on his face.",
+			"boxState": "normal",
+			"speed": 0.025,
+			"portrait": "blank"
+		},
+		{
+			"speed": 0.04,
+			"portrait": "gf-post",
+			"boxState": "normal",
+			"expression": "talk",
+			"text": "Hey BF, ready to learn the ropes again?"
+		},
+		{
+			"expression": "huh",
+			"text": "Uh, sure.",
+			"boxState": "normal",
+			"speed": 0.05,
+			"portrait": "bf-post"
+		},
+		{
+			"expression": "bothered",
+			"text": "Er, I mean...",
+			"boxState": "normal",
+			"speed": 0.05,
+			"portrait": "bf-post"
+		},
+		{
+			"expression": "talk",
+			"text": "Beep!",
+			"boxState": "normal",
+			"speed": 0.05,
+			"portrait": "bf-post"
+		},
+		{
+			"expression": "happy",
+			"text": "Alright! Let's start with something simple, just like before.",
+			"boxState": "normal",
+			"speed": 0.04,
+			"portrait": "gf-post"
+		}
+	]
+}

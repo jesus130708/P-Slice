@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="prompt.png">
+	<!-- Created with Adobe Animate version 21.0.0.35450 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="prompt idle0000" x="10" y="10" width="300" height="150"/>
+	<SubTexture name="prompt idle0001" x="10" y="10" width="300" height="150"/>
+	<SubTexture name="prompt idle0002" x="10" y="170" width="300" height="150"/>
+	<SubTexture name="prompt idle0003" x="10" y="170" width="300" height="150"/>
+</TextureAtlas>

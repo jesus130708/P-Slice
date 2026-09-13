@@ -1,9 +1,35 @@
-stage
-spooky
+-----PICO STAGES-----
 philly
+philly-2
+philly-3
+-----SPOOKY STAGES-----
+graveyard
+graveyard-2
+graveyard-3
+-----MOM STAGES-----
 limo
-mall
-mallEvil
+limo-2
+limo-3
+-----BOYFRIEND STAGES-----
+alleyway
+alleyway-bside
+-----SENPAI STAGES-----
 school
-schoolEvil
-tank
+school-2
+school-3
+schoolGlitch
+-----DAD STAGES-----
+stage-dearest
+stage-dearest-2
+stage-dearest-3
+stage-dearest-chances
+stage-dearest-tempest
+stage-dearest-dead
+stage
+---DARNELL STAGES---
+city
+city-2
+-----OTHERS-----
+skeld
+alleyway-duality
+

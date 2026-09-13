@@ -1,0 +1,50 @@
+{
+	"position": [
+		0,
+		30
+	],
+	"dialogue_pos": "center",
+	"scale": 1.4,
+	"image": "blank",
+	"animations": [
+		{
+			"idle_offsets": [
+				-1,
+				-12
+			],
+			"loop_offsets": [
+				0,
+				-1
+			],
+			"anim": "talk",
+			"idle_name": "GF talk loop",
+			"loop_name": "GF talk"
+		},
+		{
+			"loop_offsets": [
+				0,
+				0
+			],
+			"anim": "happy",
+			"idle_offsets": [
+				0,
+				0
+			],
+			"loop_name": "GF happy",
+			"idle_name": "GF happy loop"
+		},
+		{
+			"loop_offsets": [
+				0,
+				0
+			],
+			"anim": "worried",
+			"idle_offsets": [
+				0,
+				0
+			],
+			"loop_name": "GF worried",
+			"idle_name": "GF worried loop"
+		}
+	]
+}

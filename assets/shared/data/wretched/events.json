@@ -1,0 +1,811 @@
+{
+	"song": {
+		"events": [
+			[
+				9250,
+				[
+					[
+						"Set Camera Zoom",
+						"1.5",
+						""
+					]
+				]
+			],
+			[
+				9333.33333333333,
+				[
+					[
+						"Play Animation",
+						"newyork",
+						"dad"
+					]
+				]
+			],
+			[
+				10000,
+				[
+					[
+						"Set Camera Zoom",
+						"1.8",
+						""
+					]
+				]
+			],
+			[
+				10583.3333333333,
+				[
+					[
+						"Add Camera Flash",
+						"0.9",
+						""
+					]
+				]
+			],
+			[
+				10666.6666666667,
+				[
+					[
+						"Set Camera Zoom",
+						"1.1",
+						""
+					],
+					[
+						"Alt Idle Animation",
+						"dad",
+						"-alt"
+					]
+				]
+			],
+			[
+				33916.6666666667,
+				[
+					[
+						"Play Animation",
+						"reload",
+						"bf"
+					]
+				]
+			],
+			[
+				36666.6666666667,
+				[
+					[
+						"Play Animation",
+						"shoot",
+						"bf"
+					]
+				]
+			],
+			[
+				37000,
+				[
+					[
+						"Play Animation",
+						"shoot",
+						"bf"
+					]
+				]
+			],
+			[
+				41916.6666666667,
+				[
+					[
+						"Play Animation",
+						"reload",
+						"bf"
+					]
+				]
+			],
+			[
+				42666.6666666667,
+				[
+					[
+						"Play Animation",
+						"shoot",
+						"bf"
+					]
+				]
+			],
+			[
+				46916.6666666667,
+				[
+					[
+						"Play Animation",
+						"reload",
+						"bf"
+					]
+				]
+			],
+			[
+				47666.6666666667,
+				[
+					[
+						"Play Animation",
+						"shoot",
+						"bf"
+					]
+				]
+			],
+			[
+				48000,
+				[
+					[
+						"Play Animation",
+						"shoot",
+						"bf"
+					]
+				]
+			],
+			[
+				52583.3333333334,
+				[
+					[
+						"Play Animation",
+						"reload",
+						"bf"
+					]
+				]
+			],
+			[
+				53333.3333333334,
+				[
+					[
+						"Play Animation",
+						"shoot",
+						"bf"
+					]
+				]
+			],
+			[
+				54666.6666666667,
+				[
+					[
+						"Play Animation",
+						"shoot",
+						"bf"
+					]
+				]
+			],
+			[
+				55166.6666666667,
+				[
+					[
+						"Play Animation",
+						"shoot",
+						"bf"
+					]
+				]
+			],
+			[
+				55666.6666666667,
+				[
+					[
+						"Play Animation",
+						"shoot",
+						"bf"
+					]
+				]
+			],
+			[
+				56250,
+				[
+					[
+						"Play Animation",
+						"reload",
+						"bf"
+					]
+				]
+			],
+			[
+				57000,
+				[
+					[
+						"Play Animation",
+						"shoot",
+						"bf"
+					]
+				]
+			],
+			[
+				57333.3333333334,
+				[
+					[
+						"Play Animation",
+						"shoot",
+						"bf"
+					]
+				]
+			],
+			[
+				57833.3333333334,
+				[
+					[
+						"Play Animation",
+						"shoot",
+						"bf"
+					]
+				]
+			],
+			[
+				58333.3333333334,
+				[
+					[
+						"Play Animation",
+						"shoot",
+						"bf"
+					]
+				]
+			],
+			[
+				60000,
+				[
+					[
+						"Play Animation",
+						"shoot",
+						"bf"
+					]
+				]
+			],
+			[
+				61000,
+				[
+					[
+						"Play Animation",
+						"shoot",
+						"bf"
+					]
+				]
+			],
+			[
+				61333.3333333334,
+				[
+					[
+						"Play Animation",
+						"shoot",
+						"bf"
+					]
+				]
+			],
+			[
+				66333.3333333334,
+				[
+					[
+						"Play Animation",
+						"shoot",
+						"bf"
+					]
+				]
+			],
+			[
+				66666.6666666667,
+				[
+					[
+						"Play Animation",
+						"shoot",
+						"bf"
+					]
+				]
+			],
+			[
+				68583.3333333334,
+				[
+					[
+						"Play Animation",
+						"reload",
+						"bf"
+					]
+				]
+			],
+			[
+				69333.3333333334,
+				[
+					[
+						"Play Animation",
+						"shoot",
+						"bf"
+					]
+				]
+			],
+			[
+				73916.6666666667,
+				[
+					[
+						"Play Animation",
+						"reload",
+						"bf"
+					]
+				]
+			],
+			[
+				74666.6666666667,
+				[
+					[
+						"Play Animation",
+						"shoot",
+						"bf"
+					]
+				]
+			],
+			[
+				90000,
+				[
+					[
+						"Play Animation",
+						"shoot",
+						"bf"
+					]
+				]
+			],
+			[
+				90333.3333333333,
+				[
+					[
+						"Play Animation",
+						"shoot",
+						"bf"
+					]
+				]
+			],
+			[
+				90666.6666666666,
+				[
+					[
+						"Play Animation",
+						"shoot",
+						"bf"
+					]
+				]
+			],
+			[
+				95999.9999999999,
+				[
+					[
+						"Play Animation",
+						"shoot",
+						"bf"
+					]
+				]
+			],
+			[
+				100250,
+				[
+					[
+						"Play Animation",
+						"reload",
+						"bf"
+					]
+				]
+			],
+			[
+				101000,
+				[
+					[
+						"Play Animation",
+						"shoot",
+						"bf"
+					]
+				]
+			],
+			[
+				101333.333333333,
+				[
+					[
+						"Play Animation",
+						"shoot",
+						"bf"
+					]
+				]
+			],
+			[
+				105916.666666667,
+				[
+					[
+						"Play Animation",
+						"reload",
+						"bf"
+					]
+				]
+			],
+			[
+				106666.666666667,
+				[
+					[
+						"Play Animation",
+						"shoot",
+						"bf"
+					]
+				]
+			],
+			[
+				108000,
+				[
+					[
+						"Play Animation",
+						"shoot",
+						"bf"
+					]
+				]
+			],
+			[
+				108500,
+				[
+					[
+						"Play Animation",
+						"shoot",
+						"bf"
+					]
+				]
+			],
+			[
+				109000,
+				[
+					[
+						"Play Animation",
+						"shoot",
+						"bf"
+					]
+				]
+			],
+			[
+				109583.333333333,
+				[
+					[
+						"Play Animation",
+						"reload",
+						"bf"
+					]
+				]
+			],
+			[
+				110333.333333333,
+				[
+					[
+						"Play Animation",
+						"shoot",
+						"bf"
+					]
+				]
+			],
+			[
+				110666.666666667,
+				[
+					[
+						"Play Animation",
+						"shoot",
+						"bf"
+					]
+				]
+			],
+			[
+				111166.666666667,
+				[
+					[
+						"Play Animation",
+						"shoot",
+						"bf"
+					]
+				]
+			],
+			[
+				111666.666666667,
+				[
+					[
+						"Play Animation",
+						"shoot",
+						"bf"
+					]
+				]
+			],
+			[
+				113333.333333333,
+				[
+					[
+						"Play Animation",
+						"shoot",
+						"bf"
+					]
+				]
+			],
+			[
+				114333.333333333,
+				[
+					[
+						"Play Animation",
+						"shoot",
+						"bf"
+					]
+				]
+			],
+			[
+				114666.666666667,
+				[
+					[
+						"Play Animation",
+						"shoot",
+						"bf"
+					]
+				]
+			],
+			[
+				116583.333333333,
+				[
+					[
+						"Play Animation",
+						"reload",
+						"bf"
+					]
+				]
+			],
+			[
+				117250,
+				[
+					[
+						"Add Camera Flash",
+						"0.5",
+						""
+					],
+					[
+						"Change Character",
+						"dad",
+						"senpai-wretched2"
+					],
+					[
+						"Set Camera Zoom",
+						"1.8",
+						""
+					]
+				]
+			],
+			[
+				117333.333333333,
+				[
+					[
+						"Play Animation",
+						"shoot",
+						"bf"
+					]
+				]
+			],
+			[
+				117750,
+				[
+					[
+						"Play Animation",
+						"reload",
+						"bf"
+					]
+				]
+			],
+			[
+				118333.333333333,
+				[
+					[
+						"Play Animation",
+						"shoot",
+						"bf"
+					]
+				]
+			],
+			[
+				118666.666666667,
+				[
+					[
+						"Play Animation",
+						"shoot",
+						"bf"
+					]
+				]
+			],
+			[
+				119166.666666667,
+				[
+					[
+						"Play Animation",
+						"shoot",
+						"bf"
+					]
+				]
+			],
+			[
+				119666.666666667,
+				[
+					[
+						"Play Animation",
+						"shoot",
+						"bf"
+					]
+				]
+			],
+			[
+				120416.666666667,
+				[
+					[
+						"Play Animation",
+						"reload",
+						"bf"
+					]
+				]
+			],
+			[
+				121333.333333333,
+				[
+					[
+						"Play Animation",
+						"shoot",
+						"bf"
+					]
+				]
+			],
+			[
+				121833.333333333,
+				[
+					[
+						"Play Animation",
+						"shoot",
+						"bf"
+					]
+				]
+			],
+			[
+				122333.333333333,
+				[
+					[
+						"Play Animation",
+						"shoot",
+						"bf"
+					]
+				]
+			],
+			[
+				122666.666666667,
+				[
+					[
+						"Play Animation",
+						"shoot",
+						"bf"
+					]
+				]
+			],
+			[
+				124000,
+				[
+					[
+						"Play Animation",
+						"shoot",
+						"bf"
+					]
+				]
+			],
+			[
+				124500,
+				[
+					[
+						"Play Animation",
+						"shoot",
+						"bf"
+					]
+				]
+			],
+			[
+				125000,
+				[
+					[
+						"Play Animation",
+						"shoot",
+						"bf"
+					]
+				]
+			],
+			[
+				125250,
+				[
+					[
+						"Play Animation",
+						"reload",
+						"bf"
+					]
+				]
+			],
+			[
+				125833.333333333,
+				[
+					[
+						"Play Animation",
+						"shoot",
+						"bf"
+					]
+				]
+			],
+			[
+				126333.333333333,
+				[
+					[
+						"Play Animation",
+						"shoot",
+						"bf"
+					]
+				]
+			],
+			[
+				126666.666666666,
+				[
+					[
+						"Play Animation",
+						"shoot",
+						"bf"
+					]
+				]
+			],
+			[
+				128000,
+				[
+					[
+						"Set Camera Zoom",
+						"1.3",
+						""
+					]
+				]
+			],
+			[
+				137583.333333333,
+				[
+					[
+						"Play Animation",
+						"selfkill",
+						"bf"
+					]
+				]
+			],
+			[
+				138326.388888889,
+				[
+					[
+						"Add Camera Flash",
+						"0.5",
+						""
+					]
+				]
+			],
+			[
+				138333.333333333,
+				[
+					[
+						"Play Animation",
+						"corrupt",
+						"bf"
+					]
+				]
+			],
+			[
+				138645.833333333,
+				[
+					[
+						"Add Camera Flash",
+						"0.5",
+						""
+					]
+				]
+			],
+			[
+				138652.777777778,
+				[
+					[
+						"Change Character",
+						"bf",
+						"pico-wretched3"
+					]
+				]
+			],
+			[
+				138671.875,
+				[
+					[
+						"Play Animation",
+						"corrupt",
+						"bf"
+					]
+				]
+			]
+		]
+	}
+}

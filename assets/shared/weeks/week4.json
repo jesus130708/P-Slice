@@ -1,0 +1,38 @@
+{
+	"storyName": "Desolation.",
+	"hideFreeplay": false,
+	"weekBackground": "alley",
+	"weekBefore": "week3",
+	"startUnlocked": true,
+	"songs": [
+		[
+			"Maniacal-Mayhem",
+			"bf-mom1",
+			[
+				20,
+				29,
+				115
+			]
+		],
+		[
+			"Devitalization",
+			"bf-mom2",
+			[
+				20,
+				29,
+				95
+			]
+		],
+		[
+			"Fatigue",
+			"bf-mom3",
+			[
+				20,
+				29,
+				55
+			]
+		]
+	],
+	"hideStoryMode": false,
+	"weekName": "Week 4"
+}

@@ -1,0 +1,67 @@
+{
+	"dialogue": [
+		{
+			"expression": "huh",
+			"text": "Spirit BF looks up at the demon with a smirk on his face, deciding to taunt him.",
+			"boxState": "normal",
+			"portrait": "blank",
+			"speed": 0.03
+		},
+		{
+			"speed": 0.04,
+			"portrait": "bf-post",
+			"boxState": "normal",
+			"expression": "huh",
+			"text": "Was that seriously it? THAT'S supposed to be a challenge?"
+		},
+		{
+			"expression": "talk",
+			"text": "Sure you aren't going senile, old man?",
+			"boxState": "normal",
+			"portrait": "bf-post",
+			"speed": 0.045
+		},
+		{
+			"expression": "annoyed",
+			"text": "...!",
+			"boxState": "normal",
+			"portrait": "dd-post",
+			"speed": 0.05
+		},
+		{
+			"expression": "annoyed",
+			"text": "You'd better watch your tongue, boy...",
+			"boxState": "normal",
+			"portrait": "dd-post",
+			"speed": 0.045
+		},
+		{
+			"expression": "annoyed",
+			"text": "I'm not done with you just yet.",
+			"boxState": "normal",
+			"portrait": "dd-post",
+			"speed": 0.04
+		},
+		{
+			"expression": "talk",
+			"text": "If you're so desparate to get your ass kicked again, be my guest!",
+			"boxState": "normal",
+			"portrait": "bf-post",
+			"speed": 0.04
+		},
+		{
+			"expression": "bothered",
+			"text": "(I think I said that right...)",
+			"boxState": "normal",
+			"portrait": "bf-post",
+			"speed": 0.05
+		},
+		{
+			"expression": "annoyed",
+			"text": "Enough with the talk.\\nLet's wrap this up quickly.",
+			"boxState": "normal",
+			"portrait": "dd-post",
+			"speed": 0.04
+		}
+	]
+}

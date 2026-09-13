@@ -1,0 +1,21 @@
+{
+	"storyName": "A New Beginning.",
+	"hideFreeplay": false,
+	"weekBackground": "tutorial",
+	"weekBefore": "weekASASASASAAAAAAAA",
+	"startUnlocked": true,
+	"songs": [
+		[
+			"Tutorial",
+			"gf-post",
+			[
+				148,
+				22,
+				83
+			]
+		]
+	],
+	"hideStoryMode": false,
+	"weekName": "Tutorial Spirit Mix",
+	"difficulties": "Spiritual"
+}

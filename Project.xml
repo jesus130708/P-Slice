@@ -33,7 +33,7 @@
 
 	<define name="DISCORD_ALLOWED" if="desktop" unless="hl" />
 
-	<define name="BASE_GAME_FILES"/>
+	<!-- <define name="BASE_GAME_FILES"/> -->
 
 	<define name="TOUCH_CONTROLS_ALLOWED" if="mobile || web || debug" />
 
@@ -118,7 +118,7 @@
 		<assets path="assets/secrets" rename="assets/shared" exclude="*.ogg" if="web" />
 		<assets path="assets/secrets" rename="assets/shared" unless="web" />
 	</section>
->
+
 	<section if="TRANSLATIONS_ALLOWED">
 		<assets path="assets/translations" rename="assets" exclude="*.ogg" if="web" />
 		<assets path="assets/translations" rename="assets" unless="web" />
@@ -127,6 +127,7 @@
 
 	<assets path="assets/atsc_shared" rename="assets/shared" />
 
+	<!--
 	<section if="BASE_GAME_FILES">
 		<section if="web">
 			<assets path="assets/base_game/week_data" rename="assets" include="*.png|*.ogg|*.mp4"
@@ -150,6 +151,7 @@
 			unless="web" />
 		<assets path="assets/base_game/shared" rename="assets/shared" unless="web" />
 	</section>
+	-->
 
 	<section if="MODS_ALLOWED">
 		<assets path='example_mods' rename='mods' embed='false' />

@@ -1,5 +1,0 @@
-:senpai:Listen here, you wretched fiend. 
-:senpai:I don't know who or WHAT you are, but you are not welcome here.
-:senpai:Get out, freak.
-:bf-faceless:trace("Your days are numbered, outspoken fool.");
-:senpai:Excuse me?

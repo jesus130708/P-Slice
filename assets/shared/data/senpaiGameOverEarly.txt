@@ -1,2 +1,0 @@
-:bfglitch:Request Failed("Unable to successfully transfer bf_soul.");
-:bfglitch:Console.Write("Game Over");

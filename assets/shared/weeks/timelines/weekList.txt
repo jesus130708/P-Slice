@@ -1,4 +1,0 @@
-week2
-weekPB
-weekPico
-weekEnd
